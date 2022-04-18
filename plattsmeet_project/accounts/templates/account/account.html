@@ -19,3 +19,11 @@
 </div>
 {% endif %}
 </div>
+
+<!-- If Auth user is viewing their own profile -->
+{% if is_self %}
+<a  href="#">Update</a>
+<div>
+<a  href="#">Change password</a>
+</div>
+{% endif %}
