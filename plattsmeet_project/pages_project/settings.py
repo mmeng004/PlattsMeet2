@@ -132,4 +132,3 @@ LOGIN_REDIRECT_URL = 'portalpage'
 LOGOUT_REDIRECT_URL = 'home' 
 
 
-BASE_URL = "http://127.0.0.1:8000"
