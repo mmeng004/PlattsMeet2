@@ -6,6 +6,8 @@ __pycache__
 db.sqlite3
 media
 pyvenv.cfg
+0001_initial.py
+0002_account.py
 
 # Backup files # 
 *.bak 
