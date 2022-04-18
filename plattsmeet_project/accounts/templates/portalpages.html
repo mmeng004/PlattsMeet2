@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% load static %} 
 {% block content %} 
+    <h1>Portal Page</h1>
     <div id="header">
         <span class="user">
             {% if request.user.is_authenticated %}
                 Hello {{user.get_username }},
             {% else %}
+                <a href="{% url 'login' %}">Log-in</a>
+            {% endif %}
+        </span>
     </div>
     <div>
         {% if request.user.is_authenticated %}
@@ -17,15 +21,7 @@
                 <a href="#">Update Profile</a>
             </li>
             <li {% if section == "viewprofile" %}class="selected"{% endif %}>
-<<<<<<< HEAD
-<<<<<<< HEAD
                 <a href="{% url 'account:view' user_id=request.user.id %}">View Profile</a>
-=======
-                <a href="#">View Profile</a>
->>>>>>> parent of f4c638c (Revert)
-=======
-                <a href="#">View Profile</a>
->>>>>>> parent of f4c638c (Revert)
             </li>
             <li {% if section == "friendrequest" %}class="selected"{% endif %}>
                 <a href="#">Friendrequest</a>
