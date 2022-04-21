@@ -25,6 +25,7 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts.views import ( userlogin, register, logoutview )
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
