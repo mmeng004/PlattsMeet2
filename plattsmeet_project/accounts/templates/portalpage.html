@@ -32,6 +32,9 @@
             <li {% if section == "clubs" %}class="selected"{% endif %}>
                 <a href="{% url 'clubs' %}">Clubs and Organizations</a>
             </li>
+            <li {% if section == "Reset Password" %}class="selected"{% endif %}>
+                <a href="{% url 'password_reset' %}">Reset Password</a>
+            </li>
             <li {% if section == "logout" %}class="selected"{% endif %}>
                 <a href="{% url 'logout' %}">Logout</a>
             </li>
