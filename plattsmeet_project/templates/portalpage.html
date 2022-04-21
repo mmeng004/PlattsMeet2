@@ -13,7 +13,7 @@
     </div>
     <div>
         {% if request.user.is_authenticated %}
-        <ul ></ul>
+        <ul>
             <li {% if section == "dashboard" %}class="selected"{% endif %}>
                 <a href="{% url 'portalpage' %}">Portal Page</a>
             </li>
