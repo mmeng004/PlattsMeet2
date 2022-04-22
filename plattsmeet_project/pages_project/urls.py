@@ -34,6 +34,7 @@ urlpatterns = [
     path('login/', userlogin, name='login'),
     path('logout/', logoutview, name='logout'),
     path('register/', register, name='register'),
+    path('profiles/', include('profiles.urls',namespace = 'profile')),
     path('', include('pages.urls')),
     path('password_reset/', auth_views.PasswordResetView.as_view(template_name='password_reset/password_reset_form.html'), name='password_reset'),
 	path('password_reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset/password_reset_done.html'),name='password_reset_done'),

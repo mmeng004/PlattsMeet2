@@ -2,8 +2,8 @@
 {% load static %} 
 {% block content %} 
     <h1>Portal Page</h1>
-    <div id="header">
-        <span class="user">
+    <div >
+        <span >
             {% if request.user.is_authenticated %}
                 Hello {{user.get_username }},
             {% else %}
@@ -13,15 +13,18 @@
     </div>
     <div>
         {% if request.user.is_authenticated %}
-        <ul class="menu"></ul>
+        <ul ></ul>
             <li {% if section == "dashboard" %}class="selected"{% endif %}>
                 <a href="{% url 'portalpage' %}">Portal Page</a>
             </li>
-            <li {% if section == "profile" %}class="selected"{% endif %}>
-                <a href="#">Update Profile</a>
+            <li {% if section == "createprofile" %}class="selected"{% endif %}>
+                <a href="{% url 'profile:createprofile' %}">Create Profile</a>
+            </li>
+            <li {% if section == "userupdate" %}class="selected"{% endif %}>
+                <a href="{% url 'account:view' user_id=request.user.id %}">View Account</a>
             </li>
             <li {% if section == "viewprofile" %}class="selected"{% endif %}>
-                <a href="{% url 'account:view' user_id=request.user.id %}">View Profile</a>
+                <a href="#">View Profile</a>
             </li>
             <li {% if section == "friendrequest" %}class="selected"{% endif %}>
                 <a href="#">Friendrequest</a>

@@ -7,10 +7,10 @@
     <center>
         <div>
             <!-- If Auth user is viewing their own profile -->
-            <p>Account Details:</p>
-            <p>Email:</p>
+            <p>Profile Details:</p>
+            <p>Major:</p>
             {% if is_self %}
-                <p>{{email}}<p>
+                <p>{{bio}}<p>
             {% else %}
                     {% if hide_email %}
                         <h5>**********</h5>
@@ -31,5 +31,3 @@
     </center>
 </body>
 {% endblock content %}
-
-

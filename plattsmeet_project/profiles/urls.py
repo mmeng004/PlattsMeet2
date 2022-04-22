@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 
-app_name = 'account' 
+app_name = 'profile' 
 
 #urlpatterns = [
  # post views
@@ -16,8 +16,9 @@ app_name = 'account'
  #path('<user_id>/',views.account_view, name = 'accountviews'),}
 
 urlpatterns = [
-	path('<user_id>/', views.account_view, name="view"),
-	path('edit/', views.update_account, name='userupdate'),
-	#path('profile/', views.update_profile, name='profile'),
+	#path('<user_id>/', views.view_profile, name='view'),
+	path('createprofile/', views.update_profile, name='createprofile'),
+	#path('<user_id>/viewprofile/', views.view_profile, name='viewprofile'),
+	
 ]
 

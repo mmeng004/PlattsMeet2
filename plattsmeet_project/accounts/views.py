@@ -9,10 +9,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
-from accounts.models import Account,Profile
+from accounts.models import Account 
 from django.contrib.auth import login, authenticate, logout
-from accounts.forms import UserLoginForm, RegistrationForm,UserUpdateForm, ProfileUpdateForm
+from accounts.forms import UserLoginForm, RegistrationForm,UserUpdateForm 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -25,10 +26,12 @@ def register(request, *args, **kwargs):
 	if request.POST:
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
-			form.save()
+			new_user = form.save()
+			# Create the user profile
+			#Profile.objects.create(user = new_user)
             #register and login
 			email = form.cleaned_data.get('email').lower()
-			password = form.cleaned_data.get('password1')
+			password = form.cleaned_data.get('password1') 
 			account = authenticate(email=email, password=password)
 			login(request, account)
 			destination = kwargs.get("next")
@@ -91,29 +94,27 @@ def userlogin(request):
 #                   {'user_form': user_form})
 
 # @login_required
-# def edit(request):
-#     if request.method == 'POST':
-#         user_form = UserEditForm(instance=request.user,
-#                                  data=request.POST)
-#         profile_form = ProfileEditForm(
-#                                     instance=request.user.profile,
-#                                     data=request.POST,
-#                                     files=request.FILES)
-#         if user_form.is_valid() and profile_form.is_valid():
-#             user_form.save()
-#             profile_form.save()
-#             messages.success(request, 'Profile updated successfully')
-#         else:
-#             messages.error(request, 'Error updating your profile')
-#     else:
-#         user_form = UserEditForm(instance=request.user)
-#         profile_form = ProfileEditForm(instance=request.user.profile)
-#     return render(request,
-#                   'account/edit.html',
-#                   {'user_form': user_form,
-#                    'profile_form': profile_form})
-
-
+# """ # def edit(request):
+#       if request.method == 'POST':
+#           user_form = UserEditForm(instance=request.user,
+#                                    data=request.POST)
+#           profile_form = ProfileEditForm(
+#                                       instance=request.user.profile,
+#                                       data=request.POST,
+#                                       files=request.FILES)
+#           if user_form.is_valid() and profile_form.is_valid():
+#               user_form.save()
+#               profile_form.save()
+#              messages.success(request, 'Profile updated successfully')
+#           else:
+#               messages.error(request, 'Error updating your profile')
+#       else:
+#           user_form = UserEditForm(instance=request.user)
+#           profile_form = ProfileEditForm(instance=request.user.profile)
+#       return render(request,
+#                     'account/edit.html',
+#                     {'user_form': user_form,
+#                     'profile_form': profile_form})
 
 
 #view account
@@ -155,7 +156,51 @@ def account_view(request, *args, **kwargs):
 		return render(request, "account/account.html", context)
 
 
+@login_required
+def update_account(request):
+	if request.method == 'POST':
+		user_form = UserUpdateForm(request.POST, instance=request.user)
+		if user_form.is_valid():
+			user_form.save()
+			messages.success(request, ('Your profile was successfully updated!'))
+			return redirect('portalpage')
+		else:
+			messages.error(request, ('Please correct the error below.'))
+	else:
+		user_form = UserUpdateForm(request.POST, instance=request.user)
+		context = {
+        'user_form': user_form,
+    }
+	return render(request, 'accounts/edit.html', {
+		  'user_form': user_form,
+    })
 
+
+
+# """ @login_required
+# def update_profile(request):
+# 	if request.method == 'POST':
+# 		user_form = UserUpdateForm(request.POST, instance=request.user)
+# 		profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
+# 		if user_form.is_valid() and profile_form.is_valid():
+# 			user_form.save()
+# 			profile_form.save()
+# 			messages.success(request, _('Your profile was successfully updated!'))
+# 			return redirect('portalpage')
+# 		else:
+# 				messages.error(request, _('Please correct the error below.'))
+# 	else:
+# 		user_form = UserUpdateForm(instance=request.user)
+# 		profile_form = ProfileUpdateForm(instance=request.user.profile)
+		
+# 		context = {
+#         'user_form': user_form,
+#         'profile_form': profile_form
+#     }
+# 	return render(request, 'account/profile.html', {
+# 		 'user_form': user_form,
+# 		 'profile_form': profile_form
+#     })
 
 
 
