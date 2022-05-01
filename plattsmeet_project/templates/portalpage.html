@@ -18,17 +18,14 @@
         </span>
     </div>
     <div>
-        <p>Search by:</p>
-    <li>
-        <a href="{% url 'profile:searchbymajor' %}">Majors</a>
-        <a href="{% url 'profile:searchbyhobbies' %}">Hobbies</a>
-    </li>
-    </div>
-    <div>
         {% if request.user.is_authenticated %}
         <ul>
             <li {% if section == "dashboard" %}class="selected"{% endif %}>
                 <a href="{% url 'portalpage' %}">Portal Page</a>
+            </li>
+            <li>
+                <a href="{% url 'profile:searchbymajor' %}">Search by Majors</a>
+                <a href="{% url 'profile:searchbyhobbies' %}">Search by Hobbies</a>
             </li>
             <li {% if section == "createprofile" %}class="selected"{% endif %}>
                 <a href="{% url 'profile:createprofile' %}">Create Profile</a>
