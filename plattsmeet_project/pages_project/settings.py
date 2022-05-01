@@ -15,15 +15,10 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-<<<<<<< HEAD
-=======
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
->>>>>>> 54a9a44d2b91da46bd2f1e806b43fa6a921093cd
 
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -46,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'django.contrib.postgres',
+    'django.contrib.postgres',
     'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',   #api for friendrequest
     'profiles.apps.ProfilesConfig',
@@ -150,8 +145,8 @@ LOGOUT_REDIRECT_URL = 'home'
 
 
 #Upload media files
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 BASE_URL = "http://127.0.0.1:8000"
 

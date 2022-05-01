@@ -8,7 +8,6 @@ from django.conf import settings
 from django.db.models.signals import post_save
 
 #username - proper ones rather than ID values
-from autoslug import AutoSlugField
 
 #custom account model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager

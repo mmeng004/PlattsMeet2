@@ -4,11 +4,11 @@
 
 <body>
   <center>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       <h1>Update Profile</h1>
       {% csrf_token %}
       <br>
-				<p>Major</p> {{ profile_form.major }}
+      <p>Major</p> {{ profile_form.major }}
       <br>
       <p>Pronouns</p> {{ profile_form.pronouns }}
       <br>
@@ -18,7 +18,7 @@
       <br>
       <p>Photo</p>{{ profile_form.photo }}
       <button type="submit">Save changes</button>
-    </form>
+  </form>
   </center>
 </body>
 

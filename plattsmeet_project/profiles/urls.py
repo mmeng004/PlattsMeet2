@@ -17,8 +17,11 @@ app_name = 'profile'
 
 urlpatterns = [
 	#path('<user_id>/', views.view_profile, name='view'),
+	path('viewprofile/', views.profile_view, name='viewprofile'),
 	path('createprofile/', views.update_profile, name='createprofile'),
-	#path('<user_id>/viewprofile/', views.view_profile, name='viewprofile'),
+	path('searchbymajor/', views.search_bymajor, name='searchbymajor'),
+	path('searchbyhobbies/',views.search_byhobbies, name='searchbyhobbies'),
+	#path('viewprofile/', views.view_profile, name='viewprofile'),
 	
 ]
 

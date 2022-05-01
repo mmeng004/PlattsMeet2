@@ -6,7 +6,11 @@ from django.urls import reverse
 from django.utils import timezone
 from django.conf import settings
 from django.db.models.signals import post_save
+
+
+
 # Create your models here.
+#Profile Model
 class Profile(models.Model):
     MAJOR = (
         ('Accounting','Accounting'),
@@ -82,22 +86,12 @@ class Profile(models.Model):
         ('Ze','Ze/Hir/Hirs'),
     )
     #settings.AUTH_USER_MODEL
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="user_profile",on_delete=models.CASCADE,null=True)
     major = models.CharField(max_length=50, choices=MAJOR)
     pronouns = models.CharField(max_length=6, choices=PRONOUNS)
     hobbies = models.CharField(max_length=120)
     bio = models.CharField(max_length=120)
     photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True )
     #friends = models.ManyToManyField("Profile", blank=True)
-
-    def get_major(self):
-        return self.major
-    def get_pronouns(self):
-        return self.pronouns
-    def get_hobbies(self):
-        return self.hobbies
-    def get_bio(self):
-        return self.bio
-    def get_photo(self):
-        return self.photo
+    
 

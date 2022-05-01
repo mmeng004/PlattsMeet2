@@ -21,15 +21,55 @@
             <p >Username:</p>
             <p>{{username}}<p>
             {% if is_self %}
-            <a href="#">Update</a>
+            <a href="{% url 'account:edit' user_id=id %}">Update</a>
             <div >
-                <a href="#">Change password</a>
+                <a href="{% url 'password_change'%}">Change password</a>
+                <a href="#">Delete Account</a>
+                <a href="{% url 'portalpage' %}">Portal Page</a>
+            </div>
+            {% endif %}
+        </div>
+
+        {% if request.user.is_authenticated %}
+        <div>
+            {% if request_sent == 0 %}
+            <diV>
+                <span>>Accept Friend request</span>
+                <span>Cancel</span>
+            </diV>
+            {% endif %}
+        </div>
+        <div>
+            {% if is_friend == False and is_self == False %}
+                            {% if request_sent == 1 %}
+                            <div>
+                                <button>
+                                    Cancel Friend Request
+                                </button>
+                            </div>
+                            {% endif %}
+                            {% if request_sent == -1 %}
+                            <div>
+                                <button>
+                                   Send Friend Request
+                                </button>
+                            </div>
+                            {% endif %}
+            {% endif %}
+            {% if is_friend %}
+            <div>
+                <button>
+                    Friends
+                </button>
+                <div>
+                    <a>Unfriend</a>
+                </div>
             </div>
             {% endif %}
         </div>
 
     </center>
 </body>
-{% endblock content %}
+{% endblock %}
 
 

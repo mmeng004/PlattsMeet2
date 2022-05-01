@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load static %} 
 {% block content %} 
-    <h1>Portal Page</h1>
+<center>
+    <p>Portal Page</p>
+    <div>
+        <form onsubmit="return executeQuery();">
+            <input type="text" class="form-control" name="q" id="id_q_large" placeholder="Search...">
+        </form>
+    </div>
     <div >
         <span >
             {% if request.user.is_authenticated %}
@@ -12,8 +18,14 @@
         </span>
     </div>
     <div>
+        <p>Search by:</p>
+    <li>
+        <a href="{% url 'profile:searchbymajor' %}">Majors</a>
+        <a href="{% url 'profile:searchbyhobbies' %}">Hobbies</a>
+    </li>
+    </div>
+    <div>
         {% if request.user.is_authenticated %}
-        <ul ></ul>
             <li {% if section == "dashboard" %}class="selected"{% endif %}>
                 <a href="{% url 'portalpage' %}">Portal Page</a>
             </li>
@@ -24,7 +36,7 @@
                 <a href="{% url 'account:view' user_id=request.user.id %}">View Account</a>
             </li>
             <li {% if section == "viewprofile" %}class="selected"{% endif %}>
-                <a href="#">View Profile</a>
+                <a href="{% url 'profile:viewprofile' %}">View Profile</a>
             </li>
             <li {% if section == "friendrequest" %}class="selected"{% endif %}>
                 <a href="#">Friendrequest</a>
@@ -41,7 +53,19 @@
             <li {% if section == "logout" %}class="selected"{% endif %}>
                 <a href="{% url 'logout' %}">Logout</a>
             </li>
+      
         </ul>
+        <script type="text/javascript">
+            function executeQuery() {
+                var query = ""
+                if (query == ""){
+                    query = document.getElementById('id_q_large').value;
+                }
+                window.location.replace("{% url 'search' %}?q=" + query)
+                return false
+            }
+        </script>
         {% endif %}
     </div>
+</center>
 {% endblock content %}

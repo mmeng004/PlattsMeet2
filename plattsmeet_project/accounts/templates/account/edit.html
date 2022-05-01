@@ -1,11 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <h1>Edit your account</h1>
-  <p>You can edit your account using the following form:</p>
-  <form enctype="multipart/form-data" method="post">
-    {{ user_form.as_p }}
-    {% csrf_token %}
-    <p><input type="submit" value="Save changes"></p>
-  </form>
+
+  <body>
+    <center>
+        <p>Edit your account</p>
+        <p>You can edit your account using the following form:</p>
+        <div>
+          <form class="form-signin" method="post">
+          {% csrf_token %}
+          <h2>Email</h2>
+          <input type="email" name="email" placeholder="Email address" required autofocus value={{form.initial.email}}>
+          <h3>Username</h3>
+          <input type="text" name="username" placeholder="Username" required value="{{form.initial.username}}">
+          {% for field in form %}
+					<p>{% for error in field.errors %}
+					<p style="color: red">{{ error }}</p>
+					{% endfor %}
+					</p>
+					{% endfor %}
+					{% if form.non_field_errors %}
+          <div style="color: red">
+            <p>{{form.non_field_errors}}</p>
+          </div>
+          {% endif %}
+          <div>
+						<button type="submit">Update</button>
+					</div>
+          </form>
+        </div>
+    </center>
+</body>
+
 {% endblock %}
