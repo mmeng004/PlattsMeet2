@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
          model = Profile
-         fields = ['major','pronouns','hobbies','bio', 'photo']
+         fields = ['major','firstname','lastname','pronouns','year','hobbies','bio', 'photo']
     
 
 #Search Form

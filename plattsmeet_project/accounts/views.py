@@ -13,15 +13,16 @@ from accounts.models import Account
 from django.contrib.auth import login, authenticate, logout
 from accounts.forms import UserLoginForm, RegistrationForm,UserUpdateForm 
 from django.conf import settings
-
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from friend.utils import get_friend_request_or_false
 from friend.request_status import FriendRequestStatus
 from friend.models import FriendList, FriendRequest
+from profiles.models import Profile
 
 
 
-#works register
+#works register view
 def register(request, *args, **kwargs):
 	user = request.user
 	if user.is_authenticated: 
@@ -50,13 +51,13 @@ def register(request, *args, **kwargs):
 		context['registration_form'] = form
 	return render(request, 'account/register.html', context)
 
-#works logout
+#works logout view
 def logoutview(request):
 	logout(request)
 	return redirect("home")
 
 	
-#works login
+#works login view
 def userlogin(request):
     if request.method == 'POST':
         form = UserLoginForm(request.POST)
@@ -123,7 +124,7 @@ def userlogin(request):
 #                     'profile_form': profile_form})
 
 
-#view account
+#view account view
 def account_view(request, *args, **kwargs):
 	"""
 	- Logic here is kind of tricky
@@ -137,13 +138,23 @@ def account_view(request, *args, **kwargs):
 	user_id = kwargs.get("user_id")
 	try:
 		account = Account.objects.get(pk=user_id)
+		profile = Profile.objects.get(user=user_id)
 	except:
-		return HttpResponse("Something went wrong.")
+		return HttpResponse("User does not exist .")
 	if account:
 		context['id'] = account.id
 		context['username'] = account.username
 		context['email'] = account.email
 		context['hide_email'] = account.hide_email
+		context['firstname'] = profile.firstname
+		context['lastname'] = profile.lastname
+		context['major'] = profile.major
+		context['year'] = profile.year
+		context['pronouns'] = profile.pronouns
+		context['hobbies'] = profile.hobbies
+		context['bio'] = profile.bio
+		context['photo'] = profile.photo
+		
 
 		try:
 			friend_list = FriendList.objects.get(user=account)
@@ -212,7 +223,7 @@ def account_view(request, *args, **kwargs):
 #     }) """
 
 
-
+#works search accounts
 @login_required
 def account_search_view(request, *args, **kwargs):
 	context = {}
@@ -220,7 +231,8 @@ def account_search_view(request, *args, **kwargs):
 		search_query = request.GET.get("q")
 		if len(search_query) > 0:
 			#email and username filter
-			search_results = Account.objects.filter(email__icontains=search_query).filter(username__icontains=search_query).distinct()
+			search_results = Account.objects.filter(username__icontains=search_query).distinct()
+			#psearch_results = Profile.objects.filter(firstname__icontains=search_query).filter(lastname__icontains=search_query).distinct()
 			user = request.user
 			accounts = [] # [(account1, True), (account2, False), ...]
 			for account in search_results:
@@ -229,6 +241,9 @@ def account_search_view(request, *args, **kwargs):
 				
 	return render(request, "account/search.html", context)
 
+
+
+#works account edit 
 @login_required
 def edit_account(request, *args, **kwargs):
 	user_id = kwargs.get("user_id")
@@ -240,9 +255,11 @@ def edit_account(request, *args, **kwargs):
 		form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
 		if form.is_valid():
 			form.save()
+			messages.success(request, 'Your profile was successfully updated!')
 			new_username = form.cleaned_data['username']
 			return redirect("account:view", user_id=account.pk)
 		else:
+			messages.error(request, 'Please correct the error below.')
 			form = AccountUpdateForm(request.POST, instance=request.user,
 				initial={
 					"id": account.pk,

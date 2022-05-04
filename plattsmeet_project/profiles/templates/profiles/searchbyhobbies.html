@@ -2,7 +2,7 @@
 {% load static %} 
 {% block content %} 
   {% if query %}
-    <h1>Profiles containing "{{ query }}"</h1>
+    <h1>Students majoring in "{{ query }}"</h1>
     <h3>
       {% with results.count as total_results %}
         Found {{ total_results }} result{{ total_results|pluralize }}
@@ -10,7 +10,7 @@
     </h3>
     {% for profiles in results %}
       <h4>
-        <a href="{{ profiles.get_absolute_url }}">
+        <a href ="{% url 'account:view' user_id=account.0.id %}">
           {{ profiles.user }}
         </a>
       </h4>

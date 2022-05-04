@@ -10,10 +10,11 @@ from .models import Profile
 from .forms import ProfileUpdateForm , SearchForm
 #search functionality
 from django.contrib.postgres.search import SearchVector
-
+from accounts.views import account_search_view
 #Search Functionality
-#search view - major
-def search_bymajor(request):
+
+def search_bymajor(request,*args, **kwargs):
+    context = {}
     form = SearchForm()
     query = None
     results = []
@@ -120,17 +121,17 @@ def update_profile(request):
  		profile_form = ProfileUpdateForm(request.POST, request.FILES,instance=request.user.user_profile)
  		if profile_form.is_valid():
  			profile_form.save()
- 			messages.success(request, ('Your profile was successfully updated!'))
+ 			messages.success(request, 'Your profile was successfully updated!')
  			return redirect('profile:viewprofile')
  		else:
- 			messages.error(request, ('Please correct the error below.'))
+ 			messages.error(request, 'Please correct the error below.')
  	else:
  		profile_form = ProfileUpdateForm(instance=request.user.user_profile)
  		context = {
-        'profile_form': profile_form
+        'profile_form': profile_form,
      }
  	return render(request, 'profiles/createprofile.html', {
- 		 'profile_form': profile_form 
+ 		 'profile_form': profile_form,
      })
 # @login_required
 # def view_profile(request,*args, **kwargs):

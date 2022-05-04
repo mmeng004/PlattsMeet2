@@ -6,28 +6,7 @@ from django.contrib.auth import authenticate
 from django.conf import settings
 from accounts.models import Account
 
-
-""" class LoginForm(forms.Form):
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-
-
-class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password',
-                               widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password',
-                                widget=forms.PasswordInput)
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'email')
-    def clean_password2(self):
-        cd = self.cleaned_data
-        if cd['password'] != cd['password2']:
-           raise forms.ValidationError('Passwords do not match!')
-        return cd['password2']
-
- """
-
+#register user
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(max_length=254, help_text='Required. Add a valid email address.')
 
@@ -51,10 +30,6 @@ class RegistrationForm(UserCreationForm):
 			return username
 		raise forms.ValidationError('Username "%s" is already in use.' % username)
 
-
-
-
-
 #form for users to login
 class UserLoginForm(forms.ModelForm):
 	
@@ -70,7 +45,7 @@ class UserLoginForm(forms.ModelForm):
 			if not authenticate(email=email, password=password):
 				raise forms.ValidationError("Invalid login")
 
-#Update User information
+#Update User Account information
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 

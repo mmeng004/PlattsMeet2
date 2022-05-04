@@ -1,23 +1,24 @@
 {% extends "base.html" %}
 {% load static %} 
 {% block content %} 
-
 <body>
   <center>
     <form method="post" enctype="multipart/form-data">
       <h1>Update Profile</h1>
-      {% csrf_token %}
-      <br>
-      <p>Major</p> {{ profile_form.major }}
-      <br>
-      <p>Pronouns</p> {{ profile_form.pronouns }}
-      <br>
-      <p>Hobbies</p>{{ profile_form.hobbies }}
-      <br>
-      <p>Bio</p>{{ profile_form.bio }}
-      <br>
-      <p>Photo</p>{{ profile_form.photo }}
-      <button type="submit">Save changes</button>
+      <div class = "photobox">
+        {% csrf_token %}
+        <div><p>Photo</p>{{ profile_form.photo }}</div>
+        <div>
+        <p>First Name:</p> {{ profile_form.firstname }}
+        <p>Last Name:</p> {{ profile_form.lastname }}
+        <p>Major:</p> {{ profile_form.major }}
+        <p>Class Year:</p> {{ profile_form.year }}
+        <p>Pronouns:</p> {{ profile_form.pronouns }}
+        <p>Hobbies:</p>{{ profile_form.hobbies }}
+        <p>Bio:</p>{{ profile_form.bio }}
+        <br>
+        <button type="submit">Save changes</button>
+        </div>
   </form>
   </center>
 </body>

@@ -2,63 +2,67 @@
 {% load static %}
 {% block content %}
 <div>
-	{% if accounts %}
-	{% for account in accounts %}
-	<a href="{% url 'account:view' user_id=account.0.id %}">
-	    <div>
-			<img class="img-fluid profile-image" src="{{account.0.profile_image.url}}" alt="">
-		</div>
-	</a>
-	<a href="{% url 'account:view' user_id=account.0.id %}">
+	<h1>Search Results</h1>
+	<div >
+		{% if accounts %}
 		<div>
-			<h1>
-				{{account.0.username}}
-			</h1>
-			{% if account.1 %}
-			<p>
-				<a href="#" onclick="createOrReturnPrivateChat('{{account.0.id}}')">Send a Message</a>
-			</p>
-			{% endif %}
-		</div>
-    </a>
-	<div>
-		{% if account.1 %}
-		<diV>
-			<p>
-				Friends
-			</p>
-		</diV>
-		{% else %}
-				{% if account.0 !=  request.user %}
+		{% for account in accounts %}
+		<div>
+			<a href="{% url 'account:view' user_id=account.0.id %}">
+				<div>
+					<p>{{account.0.username}}</p>
+					{% if account.1 %}
+					<p><a href="#" onclick="createOrReturnPrivateChat('{{account.0.id}}')">Send a Message</a></p>
+					{% endif %}
+					
+				</div>
 			<div>
-				<p>
-					Not Friends 
-				</p>
-				
-			</div>
+				{% if account.1 %}
+					<div>
+						<p>
+							Friends 
+						</p>
+						<span>
+						</span>
+					</div>
+				{% else %}
+					{% if account.0 !=  request.user %}
+						<div>
+							<p>
+								Not Friends 
+							</p>
+						</div>
+					{% endif %}
 				{% endif %}
-		{% endif %}
-		{% if account.0 == request.user %}
-			<div>
-				<p>
-					This is you!
-				</p>
+				{% if account.0 == request.user %}
+					<div>
+						<p>
+							This is you your account!
+						</p>
+					</div>
+				{% endif %}
 			</div>
-		{% endif %}	
-	</diV>
-</div>
-{% if forloop.counter|divisibleby:2 %}
-{% endif %}
-{% endfor %}
-{% else %}
-<div>
-	<p>No results</p>
-</div>
-{% endif %}
+		</div>
+		{% endfor %}
+		
+		{% else %} <!-- If no friends -->
+		<div>
+			<p>No results</p>
+		</div>
+		{% endif %}
+		</div>
+	</div>
+	
 </div>
 
 
+{#%  include 'chat/create_or_return_private_chat.html' %#}
 
+<script type="text/javascript">
+	function createOrReturnPrivateChat(user_id){
+		// Just a placeholder
+	}
+</script>
 {% endblock content %}
 
 

@@ -64,6 +64,11 @@ li.dropdown {
 .dropdown:hover .dropdown-content {
     display:block;
 }
+.photobox{
+    display: flex;
+    align-items:center;
+}
+        
 
 .wrapper{
     margin-top:auto;

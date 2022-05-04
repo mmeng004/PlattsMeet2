@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div>
+	<h1>Friend Requests</h1>
+	<div>
+		{% if friend_requests %}
+		<div>
+		{% for request in friend_requests %}
+		<div>
+			<a href="{% url 'account:view' user_id=request.sender.id %}">
+			</a>
+			<a href="{% url 'account:view' user_id=request.sender.id %}">
+				<div>
+                    <p>{{request.sender.username}}</p>
+				</div>
+			</a>
+			<div>
+	  			<button id="id_confirm_{{request.sender.id}}" onclick='triggerAcceptFriendRequest("{{request.id}}")'>accept</button>
+				<button id="id_cancel_{{request.sender.id}}"  onclick='triggerDeclineFriendRequest("{{request.id}}")'>cancel</button>
+			</div>
+		</div>
+		</div>
+		
+		{% endfor %}
+		
+		{% else %} <!-- If no friends -->
+		<div>
+			<p>No results</p>
+		</div>
+		{% endif %}
+		</div>
+	</div>
+	
+</div>
+
+<script type="text/javascript">
+
+	function onFriendRequestAccepted(){
+		location.reload();
+	}
+
+	function onFriendRequestDeclined(){
+		location.reload();
+	}
+
+	function triggerAcceptFriendRequest(friend_request_id){
+		acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
+	}
+
+	function triggerDeclineFriendRequest(friend_request_id){
+		declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+	}
+</script>
+
+{% include 'friend/snippets/accept_friend_request.html' %}
+{% include 'friend/snippets/decline_friend_request.html' %}
+
+
+{% endblock content %}
+

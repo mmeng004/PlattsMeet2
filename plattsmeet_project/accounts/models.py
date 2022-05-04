@@ -39,11 +39,6 @@ class MyAccountManager(BaseUserManager):
 		return user
 
 
-def get_profile_image_filepath(self, filename):
-	return 'profile_images/' + str(self.pk) + '/profile_image.png'
-
-def get_default_profile_image():
-	return "codingwithmitch/default_profile_image.png"
 
 #custom account model
 class Account(AbstractBaseUser):
@@ -55,7 +50,6 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image)
     hide_email = models.BooleanField(default=True)
     
 
@@ -64,9 +58,6 @@ class Account(AbstractBaseUser):
     objects = MyAccountManager()
     def __str__(self):
         return self.username
-    def get_profile_image_filename(self):
-        return str(self.profile_image)[str(self.profile_image).index('profile_images/' + str(self.pk) + "/"):]
-
 	# For checking permissions. to keep it simple all admin have ALL permissons
     def has_perm(self, perm, obj=None):
         return self.is_admin

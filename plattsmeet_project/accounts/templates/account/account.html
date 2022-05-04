@@ -1,26 +1,50 @@
 {% extends "base.html" %}
 {% load static %} 
-{% block content %} 
-
-
+{% block content %}
+<a href="{% url 'portalpage' %}">Back to Portal Page</a> 
 <body>
     <center>
         <div>
-            <!-- If Auth user is viewing their own profile -->
-            <p>Account Details:</p>
-            <p>Email:</p>
+			 <!--User viewing their own profile -->
             {% if is_self %}
-                <p>{{email}}<p>
+				<h1>Account Details</h1>
+				<div class = "photobox">
+					<div><img src="{{photo.url}}" alt="connect" style="max-height:300px"></div>
+					<div>
+						<p>Username:{{username}}<p>
+						<p>Email:{{email}}</p>
+						<p>First Name:{{firstname}}</p> 
+						<p>Last Name:{{lastname}}</p> 
+						<p>Major:{{major}}</p> 
+						<p>Class Level:{{year}}</p> 
+						<p>Pronouns:{{pronouns}}</p> 
+						<p>Hobbies:{{ hobbies}}</p> 
+						<p>Bio:{{bio}}</p> 
+					</div>
+				</div>
             {% else %}
-                    {% if hide_email %}
-                        <h5>**********</h5>
-                    {% else %}
-                        <p>{{email}}</p>
-                    {% endif %}
+				<h1>Profile Details</h1>
+				<div class = "photobox">
+					<div><img src="{{photo.url}}" alt="connect" style="max-height:300px"></div>
+					<div>
+						<p>Username:{{username}}<p>
+						<p>Email:{{email}}</p>
+						<p>First Name:{{firstname}}</p> 
+						<p>Last Name:{{lastname}}</p> 
+						<p>Major:{{major}}</p> 
+						<p>Class Level:{{year}}</p> 
+						<p>Pronouns:{{pronouns}}</p> 
+						<p>Hobbies:{{ hobbies}}</p> 
+						<p>Bio:{{bio}}</p> 
+					</div>
+				</div>
+
+                	   
             {% endif %}
-            <p >Username:</p>
-            <p>{{username}}<p>
+
+		    <!--User viewing their own profile -->
             {% if is_self %}
+			<br>
             <a href="{% url 'account:edit' user_id=id %}">Update</a>
             <div >
                 <a href="{% url 'password_change'%}">Change password</a>
@@ -30,46 +54,151 @@
             {% endif %}
         </div>
 
+		
         {% if request.user.is_authenticated %}
-        <div>
-            {% if request_sent == 0 %}
-            <diV>
-                <span>>Accept Friend request</span>
-                <span>Cancel</span>
-            </diV>
-            {% endif %}
-        </div>
-        <div>
-            {% if is_friend == False and is_self == False %}
-                            {% if request_sent == 1 %}
-                            <div>
-                                <button>
-                                    Cancel Friend Request
-                                </button>
-                            </div>
-                            {% endif %}
-                            {% if request_sent == -1 %}
-                            <div>
-                                <button>
-                                   Send Friend Request
-                                </button>
-                            </div>
-                            {% endif %}
-            {% endif %}
-            {% if is_friend %}
-            <div>
-                <button>
-                    Friends
-                </button>
-                <div>
-                    <a>Unfriend</a>
-                </div>
-            </div>
-            {% endif %}
-        </div>
+		<div>
 
-    </center>
-</body>
-{% endblock %}
+			<!-- THEM to YOU -->
+			{% if request_sent == 0 %}
+			<div>
+				<div >
+					<p>Accept Friend Request</p>
+					<button id="id_cancel_{{id}}"  onclick='triggerDeclineFriendRequest("{{pending_friend_request_id}}")'>Cancel</button>
+  					<button id="id_confirm_{{id}}" onclick='triggerAcceptFriendRequest("{{pending_friend_request_id}}")'>Accept</button>
+				</div>
+			</div>
+			{% endif %}
+
+			<div>
+				<!-- Cancel Friend Request / Send Friend Request / Remove Friend -->
+				{% if is_friend == False and is_self == False %}
+						<!-- You sent them a request -->
+						{% if request_sent == 1 %}
+						<div class ="photobox" >
+							<button id="id_cancel_friend_request_btn">
+								Cancel Friend Request
+							</button>
+						</div>
+						{% endif %}
+						<!--If no requests have been sent -->
+						{% if request_sent == -1 %}
+						<div class = "photobox">
+							<button id="id_send_friend_request_btn">
+								Send Friend Request
+							</button>
+						</div>
+						{% endif %}
+				{% endif %}
+					
+					
+				{% if is_friend %}
+					<div >
+						<div>
+							<button onclick="removeFriend('{{id}}', onFriendRemoved)">Unfriend </button>
+						</div>
+					</div>
+				{% endif %}
+				
+				<!-- Friend list link -->
+		  		<div>
+					<a href="{% url 'friend:list' user_id=id %}">
+						<div  class = "photobox">
+							<span></span><span class="friend-text">Friends ({{friends|length}})</span>
+						</div>
+					</a>
+				</div>
+
+			</div>
+
+			{% if friend_requests %}
+			<div >
+				<!-- Friend requests -->
+		  		<div >
+					<a href="{% url 'friend:friend-requests' user_id=id %}">
+						<div >
+							<span</span><span class="friend-text">Friend Requests ({{friend_requests|length}})</span>
+						</div>
+					</a>
+				</div>
+			</div>
+			{% endif %}
+
+			{% if is_friend %}
+				<div onclick="createOrReturnPrivateChat('{{id}}')">
+					<button>Message</button>
+				</div>
+			{% endif %}
+
+		</div>
+		{% endif %}
+
+		
+	</div>
+</div>
+
+
+<script type="text/javascript">
+
+	function onFriendRequestSent(){
+		location.reload();
+	}
+
+	function onFriendRequestCancelled(){
+		location.reload();
+	}
+
+	function onFriendRemoved(){
+		location.reload();
+	}
+
+	function onFriendRequestAccepted(){
+		location.reload();
+	}
+
+	function onFriendRequestDeclined(){
+		location.reload();
+	}
+
+
+	var sendFriendRequestBtn = document.getElementById("id_send_friend_request_btn")
+	if (sendFriendRequestBtn != null){
+		sendFriendRequestBtn.addEventListener("click", function(){
+			sendFriendRequest("{{id}}", onFriendRequestSent)
+		})
+	}
+
+	var cancelFriendRequestBtn = document.getElementById("id_cancel_friend_request_btn")
+	if(cancelFriendRequestBtn != null){
+		cancelFriendRequestBtn.addEventListener("click", function(){
+			cancelFriendRequest("{{id}}", onFriendRequestCancelled)
+		})
+	}
+
+	var removeFriendBtn = document.getElementById("id_unfriend_btn")
+	if (removeFriendBtn != null){
+		removeFriendBtn.addEventListener("click", function(){
+			removeFriend("{{id}}", onFriendRemoved)
+		})
+	}
+
+	function triggerAcceptFriendRequest(friend_request_id){
+		acceptFriendRequest(friend_request_id, onFriendRequestAccepted)
+	}
+
+	function triggerDeclineFriendRequest(friend_request_id){
+		declineFriendRequest(friend_request_id, onFriendRequestDeclined)
+	}
+	
+</script>
+
+{% include 'friend/snippets/send_friend_request.html' %}
+{% include 'friend/snippets/accept_friend_request.html' %}
+{% include 'friend/snippets/decline_friend_request.html' %}
+{% include 'friend/snippets/cancel_friend_request.html' %}
+{% include 'friend/snippets/remove_friend.html' %}
+
+{% endblock content %}
+
+
 
 

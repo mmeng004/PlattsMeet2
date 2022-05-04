@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls', namespace = 'account')),
+    path('friend/', include('friend.urls', namespace='friend')),
     path('login/', userlogin, name='login'),
     path('logout/', logoutview, name='logout'),
     path('register/', register, name='register'),

@@ -7,9 +7,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.db.models.signals import post_save
 
-
-
-# Create your models here.
+#Create your models here.
 #Profile Model
 class Profile(models.Model):
     MAJOR = (
@@ -85,13 +83,25 @@ class Profile(models.Model):
         ('They','They/Them/Theirs'),
         ('Ze','Ze/Hir/Hirs'),
     )
+    LEVEL = (
+        ('Freshman','Freshman'),
+        ('Sophmore','Sophmore'),
+        ('Junior','Junior'),
+        ('Senior','Senior'),
+        ('Graduate','Graduate'),
+
+    )
     #settings.AUTH_USER_MODEL
     user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="user_profile",on_delete=models.CASCADE,null=True)
+    firstname = models.CharField(max_length=30, null=True)
+    lastname = models.CharField(max_length=30, null=True)
     major = models.CharField(max_length=50, choices=MAJOR)
     pronouns = models.CharField(max_length=6, choices=PRONOUNS)
+    year = models.CharField(max_length=50, choices=LEVEL, default="FR")
     hobbies = models.CharField(max_length=120)
     bio = models.CharField(max_length=120)
-    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True )
+    #photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True )
+    photo = models.ImageField(max_length=255, upload_to='users/%Y/%m/%d/', null=True, blank=True, default='users/profile_blank.png')
     #friends = models.ManyToManyField("Profile", blank=True)
     
 

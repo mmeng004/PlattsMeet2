@@ -5,24 +5,25 @@
 
 <body>
     <center>
-        <div>
+        <h1>Profile Details</h1>
+        <div class = "photobox">
             <!-- If Auth user is viewing their own profile -->
-            <h1>Profile Details</h1>
-                <br>
-                <p>Major:</p> {{ request.user.user_profile.major }}
-                <br>
-                <p>Pronouns:</p> {{ request.user.user_profile.pronouns}}
-                <br>
-                <p>Hobbies:</p> {{ request.user.user_profile.hobbies}}
-                <br>
-                <p>Bio:</p> {{ request.user.user_profile.bio}}
-                <br>
-                <p>Photo:</p>
-                <img src="{{ request.user.user_profile.photo.url}}" alt="connect" style="max-height:300px">
-            <div >
-                <a href="{% url 'profile:createprofile'%}">Update</a>
-                <a href="{% url 'portalpage' %}">Portal Page</a>
+            <div>
+                <img src="{{ request.user.user_profile.photo.url}}" alt="connect" style="max-height:300px"></p>
             </div>
+            <div>
+                <p>First Name:{{ request.user.user_profile.firstname }}</p>
+                <p>Last Name:{{request.user.user_profile.lastname }}</p>
+                <p>Major:{{ request.user.user_profile.major }}</p>
+                <p>Class Year:{{request.user.user_profile.year }}</p>
+                <p>Pronouns:{{ request.user.user_profile.pronouns}}</p>
+                <p>Hobbies:{{ request.user.user_profile.hobbies}}</p>
+                <p>Bio:{{ request.user.user_profile.bio}}</p>
+            </div>
+        </div>
+        <div >
+            <a href="{% url 'profile:createprofile'%}">Edit Profile</a>
+            <a href="{% url 'portalpage' %}">Portal Page</a>
         </div>
 
     </center>
