@@ -78,10 +78,10 @@ class Profile(models.Model):
         ('TV-Video Production','TV-Video Production'),
     )
     PRONOUNS = (
-        ('He','He/Him/His'),
-        ('She','She/Her/Hers'),
-        ('They','They/Them/Theirs'),
-        ('Ze','Ze/Hir/Hirs'),
+        ('He/Him/His','He/Him/His'),
+        ('She/Her/Hers','She/Her/Hers'),
+        ('They/Them/Theirs','They/Them/Theirs'),
+        ('Ze/Hir/Hirs','Ze/Hir/Hirs'),
     )
     LEVEL = (
         ('Freshman','Freshman'),
@@ -96,12 +96,12 @@ class Profile(models.Model):
     firstname = models.CharField(max_length=30, null=True)
     lastname = models.CharField(max_length=30, null=True)
     major = models.CharField(max_length=50, choices=MAJOR)
-    pronouns = models.CharField(max_length=6, choices=PRONOUNS)
-    year = models.CharField(max_length=50, choices=LEVEL, default="FR")
+    pronouns = models.CharField(max_length=20, choices=PRONOUNS)
+    year = models.CharField(max_length=50, choices=LEVEL, default="Freshman")
     hobbies = models.CharField(max_length=120)
     bio = models.CharField(max_length=120)
     #photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True )
-    photo = models.ImageField(max_length=255, upload_to='users/%Y/%m/%d/', null=True, blank=True, default='users/profile_blank.png')
+    photo = models.ImageField(max_length=255, upload_to='users/%Y/%m/%d/', null=True, blank=True, default='static/profile_blank.png')
     #friends = models.ManyToManyField("Profile", blank=True)
     
 
