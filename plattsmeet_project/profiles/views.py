@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-# Create your views here.
 from django.conf import settings
 from .forms import ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
@@ -10,6 +9,9 @@ from .models import Profile
 from .forms import ProfileUpdateForm
 from .forms import SearchForm
 from accounts.views import account_view
+
+
+
 #search functionality
 from django.contrib.postgres.search import SearchVector
 #search functionality

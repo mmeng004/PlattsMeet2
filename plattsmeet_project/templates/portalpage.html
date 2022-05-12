@@ -29,6 +29,9 @@
             {% else %}
                 <a href="{% url 'login' %}">Log-in</a>
             {% endif %}
+                <form onsubmit="return executeQuery();">
+                    <input type="text" name="q" id="id_q_large" placeholder="Username Search">
+                </form>
             </div>
         </span>
     </div>

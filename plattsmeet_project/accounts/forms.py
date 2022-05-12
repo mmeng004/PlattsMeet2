@@ -1,7 +1,6 @@
 #Based on the tutorial from #https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django import forms
 from django.contrib.auth.models import User
-#from .models import Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 from django.conf import settings
@@ -9,7 +8,7 @@ from accounts.models import Account
 
 #register user
 class RegistrationForm(UserCreationForm):
-	email = forms.EmailField(max_length=254, help_text='Required. Add a valid email address.')
+	email = forms.EmailField(max_length=50, help_text='Required. Add a valid email address.')
 
 	class Meta:
 		model = Account
@@ -72,7 +71,6 @@ class UserUpdateForm(forms.ModelForm):
         account = super(UserUpdateForm, self).save(commit=False)
         account.username = self.cleaned_data['username']
         account.email = self.cleaned_data['email'].lower()
-        #account.hide_email = self.cleaned_data['hide_email']
         if commit:
             account.save()
         return account

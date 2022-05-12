@@ -10,7 +10,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from friend.models import FriendList
 
-#custom account model
+#custom account model creation
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 class MyAccountManager(BaseUserManager):
@@ -39,8 +39,6 @@ class MyAccountManager(BaseUserManager):
 		user.save(using=self._db)
 		return user
 
-
-
 #custom account model
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
@@ -59,16 +57,15 @@ class Account(AbstractBaseUser):
     objects = MyAccountManager()
     def __str__(self):
         return self.username
-	# For checking permissions. to keep it simple all admin have ALL permissons
+
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
-	# Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY	
     def has_module_perms(self, app_label):
         return True
 
 #Models for Profiles
-#required for a friend request - create a friend request after account save
+#required for a friend request
 @receiver(post_save, sender=Account)
 def user_save(sender, instance, **kwargs):
     FriendList.objects.get_or_create(user=instance)

@@ -1,4 +1,4 @@
-#https://codingwithmitch.com/courses/real-time-chat-messenger/
+#Based on the tutorial from https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -22,12 +22,8 @@ class FriendList(models.Model):
 
 
 	def unfriend(self, removee):
-		remover_friends_list = self # person terminating the friendship
-
-		# Remove friend from remover friend list
+		remover_friends_list = self 
 		remover_friends_list.remove_friend(removee)
-
-		# Remove friend from removee friend list
 		friends_list = FriendList.objects.get(user=removee)
 		friends_list.remove_friend(remover_friends_list.user)
 

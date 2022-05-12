@@ -12,10 +12,9 @@ from friend.request_status import FriendRequestStatus
 from friend.models import FriendList, FriendRequest
 from profiles.models import Profile
 from accounts.models import Account
-from django.contrib.postgres.search import SearchVector
 
 
-
+#delete account view
 def delete_account(request, *args, **kwargs):
 	context = {}
 	user_id = kwargs.get("user_id")
@@ -28,7 +27,7 @@ def delete_account(request, *args, **kwargs):
 		messages.success(request, 'Your account was successfully deleted!')
 	return redirect('home')
 
-
+#Based on the tutorial from #https://codingwithmitch.com/courses/real-time-chat-messenger/
 #works register view
 def register(request, *args, **kwargs):
 	user = request.user
@@ -39,9 +38,6 @@ def register(request, *args, **kwargs):
 		form = RegistrationForm(request.POST)
 		if form.is_valid():
 			new_user = form.save()
-			# Create the user profile
-			#Profile.objects.create(user = new_user)
-            #register and login
 			email = form.cleaned_data.get('email').lower()
 			password = form.cleaned_data.get('password1') 
 			account = authenticate(email=email, password=password)
@@ -86,7 +82,7 @@ def userlogin(request):
     return render(request, 'account/login.html', {'form': form})
 
 
-
+#Based on the tutorial from #https://codingwithmitch.com/courses/real-time-chat-messenger/
 #view account view
 def account_view(request, *args, **kwargs):
 	context = {}
@@ -119,11 +115,10 @@ def account_view(request, *args, **kwargs):
 			friend_list.save()
 		friends = friend_list.friends.all()
 		context['friends'] = friends
-	
-		# Define template variables
+
 		is_self = True
 		is_friend = False
-		request_sent = FriendRequestStatus.NO_REQUEST_SENT.value #friend/friend_request_status.FriendRequestStatus
+		request_sent = FriendRequestStatus.NO_REQUEST_SENT.value 
 		friend_requests = None
 		user = request.user
 		if user.is_authenticated and user != account:
@@ -132,14 +127,13 @@ def account_view(request, *args, **kwargs):
 				is_friend = True
 			else:
 				is_friend = False
-				#THEM to YOU: FriendRequestStatus.THEM_SENT_TO_YOU
+			
 				if get_friend_request_or_false(sender=account, receiver=user) != False:
 					request_sent = FriendRequestStatus.THEM_SENT_TO_YOU.value
 					context['pending_friend_request_id'] = get_friend_request_or_false(sender=account, receiver=user).id
-				#  YOU to THEM: FriendRequestStatus.YOU_SENT_TO_THEM
+
 				elif get_friend_request_or_false(sender=user, receiver=account) != False:
 					request_sent = FriendRequestStatus.YOU_SENT_TO_THEM.value
-				#No request sent from YOU or THEM: FriendRequestStatus.NO_REQUEST_SENT
 				else:
 					request_sent = FriendRequestStatus.NO_REQUEST_SENT.value
 		
@@ -151,7 +145,6 @@ def account_view(request, *args, **kwargs):
 			except:
 				pass
 			
-		# Set the template variables to the values
 		context['is_self'] = is_self
 		context['is_friend'] = is_friend
 		context['request_sent'] = request_sent
@@ -171,9 +164,9 @@ def account_search(request, *args, **kwargs):
 		if len(search_query) > 0:
 			search_results = Account.objects.filter(username__icontains=search_query).distinct() 
 			user = request.user
-			accounts = [] # [(account1, True), (account2, False), ...]
+			accounts = [] 
 			for account in search_results:
-				accounts.append((account, False)) # you have no friends yet
+				accounts.append((account, False)) 
 			context['accounts'] = accounts
 	return render(request, "account/search.html", context)
 

@@ -1,3 +1,4 @@
+<!--Based on the tutorial from #https://codingwithmitch.com/courses/real-time-chat-messenger/-->
 <script type="text/javascript">
 	function acceptFriendRequest(friend_request_id, uiUpdateFunction){
 		var url = "{% url 'friend:friend-request-accept' friend_request_id=53252623623632623 %}".replace("53252623623632623", friend_request_id)

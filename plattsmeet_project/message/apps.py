@@ -1,4 +1,4 @@
-#https://www.legionscript.com/learning/courses
+
 
 from django.apps import AppConfig
 

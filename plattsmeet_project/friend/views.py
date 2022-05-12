@@ -1,4 +1,4 @@
-#https://codingwithmitch.com/courses/real-time-chat-messenger/
+#Adapted from the tutorial from https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
@@ -21,8 +21,6 @@ def friends_list_view(request, *args, **kwargs):
 				friend_list = FriendList.objects.get(user=this_user)
 			except FriendList.DoesNotExist:
 				return HttpResponse(f"Could not find a friends list for {this_user.username}")
-			
-			# Must be friends to view a friends list
 			if user != this_user:
 				if not user in friend_list.friends.all():
 					return HttpResponse("You must be friends to view their friends list.")
@@ -59,20 +57,17 @@ def send_friend_request(request, *args, **kwargs):
 		if user_id:
 			receiver = Account.objects.get(pk=user_id)
 			try:
-				# Get any friend requests (active and not-active)
 				friend_requests = FriendRequest.objects.filter(sender=user, receiver=receiver)
 				try:
 					for request in friend_requests:
 						if request.is_active:
 							raise Exception("You already sent them a friend request.")
-					# If none are active create a new friend request
 					friend_request = FriendRequest(sender=user, receiver=receiver)
 					friend_request.save()
 					payload['response'] = "Friend request sent."
 				except Exception as e:
 					payload['response'] = str(e)
 			except FriendRequest.DoesNotExist:
-				# There are no friend requests so create one.
 				friend_request = FriendRequest(sender=user, receiver=receiver)
 				friend_request.save()
 				payload['response'] = "Friend request sent."
@@ -93,10 +88,8 @@ def accept_friend_request(request, *args, **kwargs):
 		friend_request_id = kwargs.get("friend_request_id")
 		if friend_request_id:
 			friend_request = FriendRequest.objects.get(pk=friend_request_id)
-			# confirm that is the correct request
 			if friend_request.receiver == user:
 				if friend_request: 
-					# found the request. Now accept it
 					updated_notification = friend_request.accept()
 					payload['response'] = "Friend request accepted."
 
@@ -107,7 +100,6 @@ def accept_friend_request(request, *args, **kwargs):
 		else:
 			payload['response'] = "Unable to accept that friend request."
 	else:
-		# should never happen
 		payload['response'] = "You must be authenticated to accept a friend request."
 	return HttpResponse(json.dumps(payload), content_type="application/json")
 
@@ -140,10 +132,8 @@ def decline_friend_request(request, *args, **kwargs):
 		friend_request_id = kwargs.get("friend_request_id")
 		if friend_request_id:
 			friend_request = FriendRequest.objects.get(pk=friend_request_id)
-			# confirm that is the correct request
 			if friend_request.receiver == user:
 				if friend_request: 
-					# found the request. Now decline it
 					updated_notification = friend_request.decline()
 					payload['response'] = "Friend request declined."
 				else:
@@ -153,7 +143,6 @@ def decline_friend_request(request, *args, **kwargs):
 		else:
 			payload['response'] = "Unable to decline that friend request."
 	else:
-		# should never happen
 		payload['response'] = "You must be authenticated to decline a friend request."
 	return HttpResponse(json.dumps(payload), content_type="application/json")
 
@@ -171,14 +160,11 @@ def cancel_friend_request(request, *args, **kwargs):
 				friend_requests = FriendRequest.objects.filter(sender=user, receiver=receiver, is_active=True)
 			except FriendRequest.DoesNotExist:
 				payload['response'] = "Nothing to cancel. Friend request does not exist."
-
-			# There should only ever be ONE active friend request at any given time.
 			if len(friend_requests) > 1:
 				for request in friend_requests:
 					request.cance()
 				payload['response'] = "Friend request canceled."
 			else:
-				# found the request. Now cancel it
 				friend_requests.first().cancel()
 				payload['response'] = "Friend request canceled."
 		else:

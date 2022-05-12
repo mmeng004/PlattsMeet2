@@ -1,20 +1,14 @@
-#https://www.legionscript.com/learning/courses
+#Adapted from on the tutorial from https://www.youtube.com/watch?v=oxrQdZ5KqW0  
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
-from accounts.models import Account 
 from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views import View
 from .models import Message, MessageThread
 from .forms import ThreadForm, MessageForm
-from django.views.generic.edit import UpdateView, DeleteView
-from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 from accounts.models import Account
-
-# Create your views here.
 
 class ListThreads(View):
     def get(self, request, *args, **kwargs):

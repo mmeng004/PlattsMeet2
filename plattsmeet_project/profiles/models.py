@@ -318,18 +318,16 @@ class Profile(models.Model):
     ('Zimbabwe', ('Zimbabwe')),
 )
 
-    #settings.AUTH_USER_MODEL
     user = models.OneToOneField(settings.AUTH_USER_MODEL,related_name="user_profile",on_delete=models.CASCADE,null=True)
     firstname = models.CharField(max_length=30, null=True)
     lastname = models.CharField(max_length=30, null=True)
     major = models.CharField(max_length=50, choices=MAJOR)
     pronouns = models.CharField(max_length=6, choices=PRONOUNS)
-    year = models.CharField(max_length=50, choices=LEVEL, default="FR")
+    year = models.CharField(max_length=50, choices=LEVEL, default="Freshman")
     hobbies = models.CharField(max_length=120)
     bio = models.CharField(max_length=120)
     hometown =  models.CharField(max_length=50, choices=HOME, null=True)
-    #photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True )
     photo = models.ImageField(max_length=255, upload_to='users/%Y/%m/%d/', null=False,blank=False, default='static/profile_blank.png')
-    #friends = models.ManyToManyField("Profile", blank=True)
+
     
 

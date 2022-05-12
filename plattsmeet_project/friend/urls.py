@@ -1,4 +1,4 @@
-#https://codingwithmitch.com/courses/real-time-chat-messenger/
+#Based on the tutorial from #https://codingwithmitch.com/courses/real-time-chat-messenger/-->
 from django.urls import path
 from friend.views import(
 	send_friend_request,

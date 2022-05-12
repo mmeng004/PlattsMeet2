@@ -1,4 +1,4 @@
-#https://www.legionscript.com/learning/courses
+#https://www.youtube.com/watch?v=oxrQdZ5KqW0 
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from .views import CreateThread, ListThreads, ThreadView, CreateMessage

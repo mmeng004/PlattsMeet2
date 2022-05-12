@@ -24,6 +24,7 @@
 	{% endif %}
 
 	{% for message in message_list %}
+	<p ><b>{{ message.date }}</b></p>
 	<div>
 		<div>
 			{% if message.sender_user == request.user %}
@@ -45,7 +46,7 @@
 				{% csrf_token %}
 				{{ form }}
 				<div >
-					<button type="submit">Send Message</button>
+					<button type="submit">Send</button>
 				</div>
 				
 			</form>
