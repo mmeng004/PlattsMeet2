@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load static %} 
 {% block content %}
+<style>
+	html {
+		background: url("{% static '2019moments.png' %}") repeat center fixed;
+		overflow: auto;
+        background-position: 208px 208px;
+
+	}
+</style>
     <ul>
         <li><a href="{% url 'login' %}">Log in</a></li>
         <li><a href="{% url 'register' %}">Register</a></li>
@@ -9,8 +17,9 @@
             <a href="javascript:void(0)" class="dropbtn">Help</a>
             <div class="dropdown-content">    
                 <a href="{% url 'help' %}">FAQ/Contact Us</a>
-                <a href="{% url 'password_reset' %}">Forgot password?</a></li>
+                <a href="{% url 'password_reset' %}">Forgot password?</a>
             </div>
+        </li>
     </ul>
 <!-- 
     <div>

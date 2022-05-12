@@ -1,24 +1,48 @@
 {% extends "base.html" %}
 {% load static %} 
 {% block content %} 
-
-
-<body>
+<head>
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'Taviraj';
+            font-size: 22px;
+        }
+    .media {
+    display: block;
+    align-items: flex-start;
+    background: tomato;
+    padding: 1em;
+    border-radius: 3px;
+    
+  }
+  .media-object {
+    margin-right: 1em;
+  }
+  .media-body {
+    flex: 1;
+  }
+  .media-heading {
+    margin: 0 0 .5em;
+  }
+    </style>
+</head>
+<div style="margin-left: 208px;">
     <center>
-        <h1>Profile Details</h1>
+        <h1 class="media-heading">Profile Details</h1>
         <div class = "photobox">
             <!-- If Auth user is viewing their own profile -->
-            <div>
-                <img src="{{ request.user.user_profile.photo.url}}" alt="connect" style="max-height:300px"></p>
+            <div class="media-object">
+                <img src="{{ request.user.user_profile.photo.url}}" alt="Upload a photo!" style="max-height:300px"></p>
             </div>
-            <div>
-                <p>First Name:{{ request.user.user_profile.firstname }}</p>
-                <p>Last Name:{{request.user.user_profile.lastname }}</p>
-                <p>Major:{{ request.user.user_profile.major }}</p>
-                <p>Class Year:{{request.user.user_profile.year }}</p>
-                <p>Pronouns:{{ request.user.user_profile.pronouns}}</p>
-                <p>Hobbies:{{ request.user.user_profile.hobbies}}</p>
-                <p>Bio:{{ request.user.user_profile.bio}}</p>
+            <div class="media">
+                <p>First Name: {{ request.user.user_profile.firstname }}</p>
+                <p>Last Name: {{request.user.user_profile.lastname }}</p>
+                <p>Major: {{ request.user.user_profile.major }}</p>
+                <p>Class Year: {{request.user.user_profile.year }}</p>
+                <p>Pronouns: {{ request.user.user_profile.pronouns}}</p>
+                <p>Hobbies: {{ request.user.user_profile.hobbies}}</p>
+                <p>Bio: {{ request.user.user_profile.bio}}</p>
             </div>
         </div>
         <div >
@@ -27,5 +51,5 @@
         </div>
 
     </center>
-</body>
+</div>
 {% endblock content %}
