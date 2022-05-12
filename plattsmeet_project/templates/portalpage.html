@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 {% load static %} 
 {% block content %} 
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+<style>
+	html {
+		background: url("{% static 'fieldhousetrails.png' %}") no-repeat center fixed;
+		background-size: cover;
+	}
+    input[type=text]{
+        background-color: white;
+        background-image: url("{% static 'searchicon.png' %}");
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding-left: 40px;
+    }
+</style>
 <center>
     <p>Portal Page</p>
     <div>
-        <form onsubmit="return executeQuery();">
+        <form class="myForm" onsubmit="return executeQuery();">
             <input type="text" class="form-control" name="q" id="id_q_large" placeholder="Search...">
         </form>
     </div>
@@ -21,7 +35,7 @@
         {% if request.user.is_authenticated %}
         <ul>
             <li {% if section == "dashboard" %}class="selected"{% endif %}>
-                <a href="{% url 'portalpage' %}">Portal Page</a>
+                <a class="active" href="{% url 'portalpage' %}">Portal Page</a>
             </li>
             <li>
                 <a href="{% url 'profile:searchbymajor' %}">Search by Majors</a>

@@ -1,12 +1,32 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+<style>
+	html {
+		background: url("{% static 'plattsburghsignsunset.png' %}") no-repeat center fixed;
+		background-size: cover;
+	}
+</style>
+
+<ul>
+  <li><a class="active" href="{% url 'login' %}">Log in</a></li>
+  <li><a href="{% url 'register' %}">Register</a></li>
+  <li><a href="{% url 'about' %}">About Us</a></li>
+  <li class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Help</a>
+      <div class="dropdown-content">    
+          <a href="{% url 'help' %}">FAQ/Contact Us</a>
+          <a href="{% url 'password_reset' %}">Forgot password?</a></li>
+      </div>
+</ul>
+
+<div style="margin-left:250px;">
+<h1>Login</h1>
+<p style="font-family: 'Taviraj'; font-size: 22px;">Please use your Plattsburgh.edu email address to login:</p>
 
 
-
-  <h1>Log-in</h1>
-  <p>Please, use the following form to log-in:</p>
-
-  <form method="post">
+  <form class="myForm" method="post">
     {% csrf_token %}
     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -22,8 +42,9 @@
     <p>{{login_form.non_field_errors}}</p>
     </div>
     {% endif %}
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+    <button type="submit">Log in</button>
   </form>
+</div>
   <!-- <form method="post">
     {{ form.as_p }}
     {% csrf_token %}

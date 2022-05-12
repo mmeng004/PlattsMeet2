@@ -15,28 +15,39 @@
         a:active {text-decoration:underline;}
     </style>
   </head>
-  <body>
-        <font size="5"><a href="{% url 'home' %}">Back to Landing page</a></font> 
+  <ul>
+	<li><a href="{% url 'login' %}">Log in</a></li>
+	<li><a href="{% url 'register' %}">Register</a></li>
+	<li><a href="{% url 'about' %}">About Us</a></li>
+	<li class="dropdown">
+		<a class="active" href="javascript:void(0)" class="dropbtn">Help</a>
+		<div class="dropdown-content">    
+			<a class="active" href="{% url 'help' %}">FAQ/Contact Us</a>
+			<a href="{% url 'password_reset' %}">Forgot password?</a></li>
+		</div>
+  </ul>
+  <div style="margin-left:208px">
+        
         <h1 style="text-align:center; border:2px solid Tomato;"> </h1>
         <body style="background-color:white;">
         <font size="16">
         <p><img src="https://i.ibb.co/wW82yP5/PM.png" height="150" width="150" alt="Logo" /><b>PlattsMeet Help Center</b></p>
 		</font> 
-		<font size="6">
+		<font size="5">
 		<dl>
 		    <p><dt>Q1:Do I need to pay for PlattsMeet?</dt>
-			<dd>A: No! PlattsMeet is <b>FREE</b> for all Plattsburgh's students!</dd></p>
+			<dd>A: No! PlattsMeet is <b>FREE</b> for all SUNY Plattsburgh students!</dd></p>
 			<p><dt>Q2:Can I use other email accounts to register?</dt>
-			<dd>A:PlattsMeet is making for Plattsburgh students. So the answer is no.</dd></p>
-			<p><dt>Q3:What will happen if I graduated?</dt>
-			<dd>A:  Don't worry! All your data will be removed from our server if you graduated.</dd></p>
+			<dd>A:PlattsMeet is made for Plattsburgh students. So you will need to register with your plattsburgh.edu email.</dd></p>
+			<p><dt>Q3:What will happen when I graduate?</dt>
+			<dd>A:  Don't worry! You can delete your account anytime.</dd></p>
 			<p><dt>Q4:Can I change my password or username?</dt>
-			<dd>A: Of course! You can change the password/username to anything you want.</dd></p>
+			<dd>A: Of course! You can change your password/username anytime.</dd></p>
 		</dl>
 		<h4>If you have other questions, please contact us by email! </h4>
-		<h4>Email: XXXX@plattsbugh.edu </h4>
+		<h4>Email: XXXX@plattsburgh.edu </h4>
 		</font> 
 		 <h2 style="text-align:center;border:2px solid Tomato;"><strong> </strong></h2>
-  </body>
+	</div>
 {% endblock content %}
 
