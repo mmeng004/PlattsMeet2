@@ -10,5 +10,6 @@ urlpatterns = [
 	path('createprofile/', views.update_profile, name='createprofile'),
 	path('searchbymajor/', views.search_bymajor, name='searchbymajor'),
 	path('searchbyhobbies/',views.search_byhobbies, name='searchbyhobbies'),
+	path('searchbyhometown/',views.search_byhometown, name='searchbyhometown'),
 ]
 
