@@ -2,6 +2,7 @@
 {% block content %}
 
 <div>
+	<h>Friends</h>
 	<div>
 		{% if friends %}
 		<div>
@@ -17,7 +18,6 @@
 					<h1>{{friend.0.username|truncatechars:50}}</h1>
 				</a>
 				{% if friend.1 %}
-				<a href="#" onclick="createOrReturnPrivateChat('{{friend.0.id}}')">Send a Message</a>
 				{% endif %}
 				
 			</div>
@@ -64,7 +64,5 @@
 	</div>
 	
 </div>
-
-
 
 {% endblock content %}

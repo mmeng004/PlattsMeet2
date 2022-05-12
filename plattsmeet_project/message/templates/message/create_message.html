@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div>
+	<div>
+		<div >
+			<a href="{% url 'message:inbox' %}" >Back to Your Inbox</a>
+		</div>
+	</div>
+
+	<div >
+		<div>
+			<h3>Start a Conversation!</h3>
+		</div>
+	</div>
+
+	<div>
+		<div>
+			<form method="POST">
+				{% csrf_token %}
+				<p>Enter the username for the person you would like to talk to.</p>
+				{{ form }}
+				<div >
+					<button type="submit">Continue</button>
+				</div>
+			
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

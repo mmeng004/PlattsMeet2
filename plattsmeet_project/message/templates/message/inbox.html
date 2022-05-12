@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+	<div>
+		<div >
+			<a href="{% url 'portalpage' %}" >Back to PortalPage</a>
+		</div>
+		<div>
+			<h3>Your Conversations</h3>
+		</div>
+	</div>
+
+	<div>
+		<div>
+			<form method="GET" action="{% url 'message:create-thread' %}">
+				<button type="submit">Start a Conversation</button>
+			</form>
+		</div>
+	</div>
+
+	{% for thread in threads.all %}
+	<div>
+		<div>
+			<h5>{{ thread.user }} - {{ thread.receiver }}</h5>
+			<a href="{% url 'message:thread' thread.pk %}">View Messages</a>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+
+
+{% endblock %}

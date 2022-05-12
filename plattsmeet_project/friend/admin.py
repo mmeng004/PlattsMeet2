@@ -1,12 +1,6 @@
+#https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django.contrib import admin
 from friend.models import FriendList, FriendRequest
-
-
-
-# Register your models here.
-
-
-#Building Admins for database storage
 class FriendListAdmin(admin.ModelAdmin):
     list_filter = ['user']
     list_display = ['user']

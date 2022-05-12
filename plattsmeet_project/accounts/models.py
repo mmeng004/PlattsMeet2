@@ -1,3 +1,5 @@
+#Based on the tutorial from #https://codingwithmitch.com/courses/real-time-chat-messenger/
+#https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -6,8 +8,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.conf import settings
 from django.db.models.signals import post_save
-
-#username - proper ones rather than ID values
+from friend.models import FriendList
 
 #custom account model
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -67,4 +68,7 @@ class Account(AbstractBaseUser):
         return True
 
 #Models for Profiles
-#required for a friend request
+#required for a friend request - create a friend request after account save
+@receiver(post_save, sender=Account)
+def user_save(sender, instance, **kwargs):
+    FriendList.objects.get_or_create(user=instance)

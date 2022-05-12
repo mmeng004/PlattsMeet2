@@ -1,19 +1,17 @@
-from django.db import models
+#https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
-
-
 class FriendList(models.Model):
-    #one friend list per friend
+
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user")
-    #list of friends , blank --- no friends 
 	friends = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="friends") 
+
 	def __str__(self):
 		return self.user.username
+
 	def add_friend(self, account):
-        #not in friends add to friends
 		if not account in self.friends.all():
 			self.friends.add(account)
 			self.save()
@@ -22,10 +20,13 @@ class FriendList(models.Model):
 		if account in self.friends.all():
 			self.friends.remove(account)
 
+
 	def unfriend(self, removee):
 		remover_friends_list = self # person terminating the friendship
+
 		# Remove friend from remover friend list
 		remover_friends_list.remove_friend(removee)
+
 		# Remove friend from removee friend list
 		friends_list = FriendList.objects.get(user=removee)
 		friends_list.remove_friend(remover_friends_list.user)
@@ -37,23 +38,17 @@ class FriendList(models.Model):
 		return False
 
 
+
 class FriendRequest(models.Model):
 	sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="sender")
 	receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="receiver")
-
-	is_active= models.BooleanField(blank=False, null=False, default=True)
-
-    #Time of request send
-	timestamp = models.DateTimeField(auto_now_add=True)
+	is_active=models.BooleanField(blank=False, null=False, default=True)
+	timestamp=models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.sender.username
 
 	def accept(self):
-		"""
-		Accept a friend request.
-		Update both SENDER and RECEIVER friend lists.
-		"""
 		receiver_friend_list = FriendList.objects.get(user=self.receiver)
 		if receiver_friend_list:
 			receiver_friend_list.add_friend(self.sender)
@@ -64,20 +59,17 @@ class FriendRequest(models.Model):
 				self.save()
 
 	def decline(self):
-		"""
-		Decline a friend request.
-		Is it "declined" by setting the `is_active` field to False
-		"""
 		self.is_active = False
 		self.save()
 
 
 	def cancel(self):
-		"""
-		Cancel a friend request.
-		Is it "cancelled" by setting the `is_active` field to False.
-		This is only different with respect to "declining" through the notification that is generated.
-		"""
 		self.is_active = False
 		self.save()
+
+
+
+
+
+
 

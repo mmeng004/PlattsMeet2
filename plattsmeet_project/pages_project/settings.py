@@ -35,6 +35,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',      #configuration installed for authentication -framework and models
     'django.contrib.contenttypes',  #permission association
@@ -43,9 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'pages.apps.PagesConfig',
-    'accounts.apps.AccountsConfig',   #api for friendrequest
+    'accounts.apps.AccountsConfig',  
     'profiles.apps.ProfilesConfig',
     'friend.apps.FriendConfig',
+    'message.apps.MessageConfig',
 ]
     
 #AUTH_USER_MODEL = 'accounts.CustomUser'
@@ -77,8 +79,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'pages_project.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -93,7 +93,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -112,8 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -147,7 +144,14 @@ LOGOUT_REDIRECT_URL = 'home'
 #Upload media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
 BASE_URL = "http://127.0.0.1:8000"
+
+
+WSGI_APPLICATION = 'pages_project.wsgi.application'
+
+ASGI_APPLICATION = 'pages_project.asgi.application'
+
+
+
 
 

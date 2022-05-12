@@ -12,9 +12,7 @@
 				<div>
 					<p>{{account.0.username}}</p>
 					{% if account.1 %}
-					<p><a href="#" onclick="createOrReturnPrivateChat('{{account.0.id}}')">Send a Message</a></p>
-					{% endif %}
-					
+					{% endif %}	
 				</div>
 			<div>
 				{% if account.1 %}
@@ -29,7 +27,7 @@
 					{% if account.0 !=  request.user %}
 						<div>
 							<p>
-								Not Friends 
+							
 							</p>
 						</div>
 					{% endif %}
@@ -54,15 +52,6 @@
 	</div>
 	
 </div>
-
-
-{#%  include 'chat/create_or_return_private_chat.html' %#}
-
-<script type="text/javascript">
-	function createOrReturnPrivateChat(user_id){
-		// Just a placeholder
-	}
-</script>
 {% endblock content %}
 
 

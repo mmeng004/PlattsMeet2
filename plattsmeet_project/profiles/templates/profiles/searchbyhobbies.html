@@ -2,21 +2,27 @@
 {% load static %} 
 {% block content %} 
   {% if query %}
-    <h1>Students majoring in "{{ query }}"</h1>
+    <h1>Students with interests in "{{ query }}"</h1>
     <h3>
       {% with results.count as total_results %}
-        Found {{ total_results }} result{{ total_results|pluralize }}
+        Found {{ total_results }} user{{ total_results|pluralize }}
       {% endwith %}
     </h3>
     {% for profiles in results %}
       <h4>
-        <a href ="{% url 'account:view' user_id=account.0.id %}">
-          {{ profiles.user }}
+        <a>
+          Username:{{ profiles.user }}
         </a>
       </h4>
     {% empty %}
       <p>There are no results for your query.</p>
     {% endfor %}
+    <div>
+      <form onsubmit="return executeQuery();">
+          <input type="text" name="q" id="id_q_large" placeholder="Type in username">
+      </form>
+    </div>
+
     <p><a href="{% url "profile:searchbyhobbies" %}">Search again</a></p>
   {% else %}
     <h1>Search by Hobbies</h1>
@@ -25,4 +31,15 @@
       <input type="submit" value="Search">
     </form>
   {% endif %}
+
+  <script type="text/javascript">
+    function executeQuery() {
+        var query = ""
+        if (query == ""){
+            query = document.getElementById('id_q_large').value;
+        }
+        window.location.replace("{% url 'search' %}?q=" + query)
+        return false
+    }
+  </script>
 {% endblock content %}

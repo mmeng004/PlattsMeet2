@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<div >
+	<a href="{% url 'message:inbox' %}" >Back to Your Inbox</a>
+</div>
+<center>
+<div>
+	<div>
+		<div>
+			{% if thread.receiver == request.user %}
+				<h5>@{{ thread.user }}</h5>
+			{% else %}
+				<h5>@{{ thread.receiver }}</h5>
+			{% endif %}
+		</div>
+	</div>
+
+	{% if message_list.all.count == 0 %}
+	<div >
+		<div>
+			<p>No Messages</p>
+		</div>
+	</div>
+	{% endif %}
+
+	{% for message in message_list %}
+	<div>
+		<div>
+			{% if message.sender_user == request.user %}
+				<div>
+					<p>{{ message.body }}</p>
+				</div>
+			{% elif message.receiver_user == request.user %}
+				<div>
+					<p ><b>{{ message.body }}</b></p>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+
+	<div>
+		<div >
+			<form method="POST" action="{% url 'message:create-message' thread.pk %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form }}
+				<div >
+					<button type="submit">Send Message</button>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>
+</center>
+
+
+{% endblock %}

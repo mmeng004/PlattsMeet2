@@ -1,5 +1,5 @@
+#https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django.urls import path
-
 from friend.views import(
 	send_friend_request,
 	friend_requests,

@@ -24,7 +24,7 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
-from accounts.views import ( userlogin, register, logoutview,account_search_view )
+from accounts.views import ( userlogin, register, logoutview,account_search)
 from django.contrib.auth import views as auth_views
 
 
@@ -33,6 +33,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls', namespace = 'account')),
+    #path('chat/', include('chat.urls', namespace='chat')),
+    path('messages/', include('message.urls', namespace='message')),
     path('friend/', include('friend.urls', namespace='friend')),
     path('login/', userlogin, name='login'),
     path('logout/', logoutview, name='logout'),
@@ -45,7 +47,8 @@ urlpatterns = [
 	path('password_reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset/password_reset_done.html'),name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset/password_reset_confirm.html'), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset/password_reset_complete.html'),name='password_reset_complete'),
-    path('search/', account_search_view, name="search"),
+    path('search/', account_search, name="search"),
+    #path('searchbymajor/', search_bymajor, name='searchbymajor'),
 ]
 
 

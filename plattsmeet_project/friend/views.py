@@ -1,7 +1,7 @@
+#https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
-
 from accounts.models import Account
 from friend.models import FriendRequest, FriendList
 
@@ -26,8 +26,7 @@ def friends_list_view(request, *args, **kwargs):
 			if user != this_user:
 				if not user in friend_list.friends.all():
 					return HttpResponse("You must be friends to view their friends list.")
-			friends = [] # [(friend1, True), (friend2, False), ...]
-			# get the authenticated users friend list
+			friends = []
 			auth_user_friend_list = FriendList.objects.get(user=user)
 			for friend in friend_list.friends.all():
 				friends.append((friend, auth_user_friend_list.is_mutual_friend(friend)))
@@ -62,7 +61,6 @@ def send_friend_request(request, *args, **kwargs):
 			try:
 				# Get any friend requests (active and not-active)
 				friend_requests = FriendRequest.objects.filter(sender=user, receiver=receiver)
-				# find if any of them are active (pending)
 				try:
 					for request in friend_requests:
 						if request.is_active:
@@ -130,7 +128,6 @@ def remove_friend(request, *args, **kwargs):
 		else:
 			payload['response'] = "There was an error. Unable to remove that friend."
 	else:
-		# should never happen
 		payload['response'] = "You must be authenticated to remove a friend."
 	return HttpResponse(json.dumps(payload), content_type="application/json")
 
@@ -175,7 +172,7 @@ def cancel_friend_request(request, *args, **kwargs):
 			except FriendRequest.DoesNotExist:
 				payload['response'] = "Nothing to cancel. Friend request does not exist."
 
-			# There should only ever be ONE active friend request at any given time. Cancel them all just in case.
+			# There should only ever be ONE active friend request at any given time.
 			if len(friend_requests) > 1:
 				for request in friend_requests:
 					request.cance()
@@ -187,7 +184,6 @@ def cancel_friend_request(request, *args, **kwargs):
 		else:
 			payload['response'] = "Unable to cancel that friend request."
 	else:
-		# should never happen
 		payload['response'] = "You must be authenticated to cancel a friend request."
 	return HttpResponse(json.dumps(payload), content_type="application/json")
 

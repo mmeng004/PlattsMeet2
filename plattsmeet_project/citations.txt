@@ -1,0 +1,12 @@
+References/Citations for the project
+
+
+Books
+Django for Professionals (William S. Vincent) 
+Django 3 By Example Build powerful and reliable Python web applications from scratch (Antonio Melé) 
+
+
+https://codingwithmitch.com/courses/real-time-chat-messenger/
+https://www.legionscript.com/learning/courses
+https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+

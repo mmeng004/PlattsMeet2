@@ -14,7 +14,8 @@
 						<p>Username:{{username}}<p>
 						<p>Email:{{email}}</p>
 						<p>First Name:{{firstname}}</p> 
-						<p>Last Name:{{lastname}}</p> 
+						<p>Last Name:{{lastname}}</p>
+						<p>Hometown:{{hometown}}</p>  
 						<p>Major:{{major}}</p> 
 						<p>Class Level:{{year}}</p> 
 						<p>Pronouns:{{pronouns}}</p> 
@@ -31,6 +32,7 @@
 						<p>Email:{{email}}</p>
 						<p>First Name:{{firstname}}</p> 
 						<p>Last Name:{{lastname}}</p> 
+						<p>Hometown:{{hometown}}</p>  
 						<p>Major:{{major}}</p> 
 						<p>Class Level:{{year}}</p> 
 						<p>Pronouns:{{pronouns}}</p> 
@@ -45,10 +47,10 @@
 		    <!--User viewing their own profile -->
             {% if is_self %}
 			<br>
-            <a href="{% url 'account:edit' user_id=id %}">Update</a>
+            <a href="{% url 'account:edit' user_id=id %}">Update Email/Username</a>
+			<a href="{% url 'account:delete' user_id=id %}">Delete Account</a>
             <div >
                 <a href="{% url 'password_change'%}">Change password</a>
-                <a href="#">Delete Account</a>
                 <a href="{% url 'portalpage' %}">Portal Page</a>
             </div>
             {% endif %}
@@ -124,8 +126,8 @@
 			{% endif %}
 
 			{% if is_friend %}
-				<div onclick="createOrReturnPrivateChat('{{id}}')">
-					<button>Message</button>
+				<div>
+					<a href="{% url 'message:create-thread' %}">Message</a>
 				</div>
 			{% endif %}
 

@@ -1,3 +1,4 @@
+#https://codingwithmitch.com/courses/real-time-chat-messenger/
 from django.apps import AppConfig
 
 
