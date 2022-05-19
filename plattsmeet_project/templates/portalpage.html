@@ -1,136 +1,81 @@
-{% extends "base.html" %}
-{% load static %} 
-{% block content %} 
+{% extends "base2.html" %}
+{% load static %}
+
 <link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+
+
+
+
+{% block content %}
 <style>
-	html {
-		background: url("{% static 'fieldhousetrails.png' %}") no-repeat center fixed;
-		background-size: cover;
-	}
-    input[type=text]{
+    html {
+        background: url("{% static 'fieldhousetrails.png' %}") no-repeat center fixed;
+        background-size: cover;
+
+    }
+
+    h1 {
+        color: white;
+        font-family: 'Taviraj';
+        font-size: 30px;
+        text-align: center;
+        margin: 0;
+        margin-top: 50px;
+        text-shadow: 2px 2px 6px #000000;
+    }
+
+    p {
+        font-family: Taviraj;
+        font-size: 22px;
+    }
+
+    input[type=text] {
+        width: 100%;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
         background-color: white;
-        background-image: url("{% static 'searchicon.png' %}");
+        background-image: url("{% static 'searchicon.svg' %}");
+        background-size: 20px;
         background-position: 10px 10px;
         background-repeat: no-repeat;
-        padding-left: 40px;
+        padding: 12px 20px 12px 40px;
     }
 </style>
-<center>
-    <p>Portal Page</p>
-    <div>
-        <form class="myForm" onsubmit="return executeQuery();">
-            <input type="text" class="form-control" name="q" id="id_q_large" placeholder="Search...">
-        </form>
-    </div>
-    <div >
-        <span >
-            {% if request.user.is_authenticated %}
-                Hello {{user.get_username}},
-            {% else %}
-                <a href="{% url 'login' %}">Log-in</a>
-            {% endif %}
-                <form onsubmit="return executeQuery();">
-                    <input type="text" name="q" id="id_q_large" placeholder="Username Search">
-                </form>
-            </div>
-        </span>
-    </div>
-    <div>
-        {% if request.user.is_authenticated %}
-        <ul>
-            <li {% if section == "dashboard" %}class="selected"{% endif %}>
-                <a class="active" href="{% url 'portalpage' %}">Portal Page</a>
-            </li>
-            <li>
-                <a href="{% url 'profile:searchbymajor' %}">Search by Majors</a>
-                <a href="{% url 'profile:searchbyhobbies' %}">Search by Hobbies</a>
-                <a href="{% url 'profile:searchbyhometown' %}">Search by Hometown</a>
-            </li>
-            <li {% if section == "userupdate" %}class="selected"{% endif %}>
-                <a href="{% url 'account:view' user_id=request.user.id %}">Account</a>
-            </li>
-            <li {% if section == "createprofile" %}class="selected"{% endif %}>
-                <a href="{% url 'profile:createprofile' %}">Create Profile</a>
-            </li>
-            <li {% if section == "viewprofile" %}class="selected"{% endif %}>
-                <a href="{% url 'profile:viewprofile' %}">View Profile</a>
-            </li>
-            <li {% if section == "friends" %}class="selected"{% endif %}>
-                <a href="{% url 'message:inbox' %}">Inbox</a>
-            </li>
-            
-            <li {% if section == "clubs" %}class="selected"{% endif %}>
-                <a href="{% url 'clubs' %}">Clubs and Organizations</a>
-            </li>
-            <li {% if section == "Reset Password" %}class="selected"{% endif %}>
-                <a href="{% url 'password_reset' %}">Reset Password</a>
-            </li>
-            <li {% if section == "logout" %}class="selected"{% endif %}>
-                <a href="{% url 'logout' %}">Logout</a>
-            </li>
-      
-        </ul>
-        
-        <script type="text/javascript">
-            setupChatDropdownHeader()
 
-            function executeQuery() {
-                var query = ""
-                if (query == ""){
-                    query = document.getElementById('id_q_large').value;
-                }
-                window.location.replace("{% url 'search' %}?q=" + query)
-                return false
-            }     
-              
-        </script>
+<center>
+    <!--
+    <h1 style="margin-top:100px; font-size:xx-large;">Portal Page</h1>
+-->
+    <div>
+
+        {% if request.user.is_authenticated %}
+
+        <h1> Hello {{user.get_username}}, </h1>
+
+        {% else %}
+        <a href="{% url 'login' %}">Log-in</a>
         {% endif %}
-        <script type="text/javascript">	
-            function showNotifications() {
-                const container = document.getElementById('notification-container');
-            
-                if (container.classList.contains('d-none')) {
-                    container.classList.remove('d-none');
-                } else {
-                    container.classList.add('d-none');
-                }
-            }
-            
-            function getCookie(name) {
-                let cookieValue = null;
-                if (document.cookie && document.cookie !== '') {
-                    const cookies = document.cookie.split(';');
-                    for (let i = 0; i < cookies.length; i++) {
-                        const cookie = cookies[i].trim();
-                        // Does this cookie string begin with the name we want?
-                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                            break;
-                        }
-                    }
-                }
-                return cookieValue;
-            }
-            
-            function removeNotification(removeNotificationURL, redirectURL) {
-                const csrftoken = getCookie('csrftoken');
-                let xmlhttp = new XMLHttpRequest();
-            
-                xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-                        if (xmlhttp.status == 200) {
-                            window.location.replace(redirectURL);
-                        } else {
-                            alert('There was an error');
-                        }
-                    }
-                };
-            
-                xmlhttp.open("DELETE", removeNotificationURL, true);
-                xmlhttp.setRequestHeader("X-CSRFToken", csrftoken);
-                xmlhttp.send();
-            }
-        </script>
+        <form class="myForm" onsubmit="return executeQuery();">
+            <input type="text" name="q" id="id_q_large" placeholder="   Search for people..">
+        </form>
+
     </div>
+
+    <script type="text/javascript">
+        setupChatDropdownHeader()
+
+        function executeQuery() {
+            var query = ""
+            if (query == "") {
+                query = document.getElementById('id_q_large').value;
+            }
+            window.location.replace("{% url 'search' %}?q=" + query)
+            return false
+        }
+
+    </script>
+
 </center>
 {% endblock content %}

@@ -1,32 +1,79 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
+{% load static %}
 {% block content %}
-<div>
-	<div>
-		<div >
-			<a href="{% url 'portalpage' %}" >Back to PortalPage</a>
-		</div>
-		<div>
-			<h3>Your Conversations</h3>
-		</div>
-	</div>
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+<style>
+	* {
 
-	<div>
-		<div>
-			<form method="GET" action="{% url 'message:create-thread' %}">
-				<button type="submit">Start a Conversation</button>
-			</form>
-		</div>
-	</div>
+		box-sizing: border-box;
 
-	{% for thread in threads.all %}
-	<div>
-		<div>
-			<h5>{{ thread.user }} - {{ thread.receiver }}</h5>
-			<a href="{% url 'message:thread' thread.pk %}">View Messages</a>
+	}
+
+	.column {
+		float: left;
+		padding: 10px;
+		height: 1000px;
+	}
+
+	/* Left and right column */
+	.column.side {
+		background: url("{% static 'redchatbg.jpg' %}");
+		width: 25%;
+	}
+
+	/* Middle column */
+	.column.middle {
+		width: 50%;
+		background: rgb(21, 37, 63);
+		background: linear-gradient(180deg, rgba(21, 37, 63, 0.7959558823529411) 0%, rgba(157, 158, 162, 0.8687850140056023) 29%, rgba(198, 59, 66, 0.8379726890756303) 100%);
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	@media (max-width: 600px) {
+
+		.column.side,
+		.column.middle {
+			width: 100%;
+		}
+	}
+</style>
+
+<div class="row" style="font-family:'Taviraj';">
+	<div class="column side"></div>
+	<center>
+		<div class="column middle">
+
+			<div>
+				<h3 style="margin-top:50px; font-size:30px;">Your Conversations:</h3>
+			</div>
+
+
+			<div>
+				<div>
+					<form method="GET" action="{% url 'message:create-thread' %}">
+						<button class="button button2" type="submit">Start a new conversation</button>
+					</form>
+				</div>
+			</div>
+
+			{% for thread in threads.all %}
+			<div style="border: 2px solid #800000; border-radius: 5px; margin:5px; width:50%">
+				<div>
+					<h3>{{ thread.user }} - {{ thread.receiver }}</h3>
+					<a href="{% url 'message:thread' thread.pk %}"><button class="button button2">View
+							Messages</button></a>
+				</div>
+			</div>
+			{% endfor %}
 		</div>
-	</div>
-	{% endfor %}
+
+	</center>
+	<div class="column side"></div>
 </div>
-
-
 {% endblock %}

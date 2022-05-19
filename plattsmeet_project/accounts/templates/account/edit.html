@@ -1,36 +1,91 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
+{% load static %}
 {% block content %}
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+<style>
+  * {
 
+    box-sizing: border-box;
 
-  <body>
-    <center>
-        <p>Edit your account</p>
-        <p>You can edit your account using the following form:</p>
-        <div>
-          <form class="form-signin" method="post">
+  }
+
+  h1 {
+    color: white;
+    font-family: 'Taviraj';
+    font-size: 40px;
+  }
+
+  .column {
+    float: left;
+    padding: 10px;
+    height: 1000px;
+  }
+
+  /* Left and right column */
+  .column.side {
+    background: url("{% static 'redandblackabstract.jpg' %}") repeat center;
+    background-size: 550px;
+    width: 25%;
+  }
+
+  /* Middle column */
+  .column.middle {
+    width: 50%;
+    font-family: 'Taviraj';
+    background: rgb(80, 70, 70);
+    background: linear-gradient(325deg, rgba(80, 70, 70, 0.9500175070028011) 0%, rgba(186, 165, 165, 0.938813025210084) 57%, rgba(199, 59, 66, 0.9360119047619048) 100%);
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  @media (max-width: 600px) {
+
+    .column.side,
+    .column.middle {
+      width: 100%;
+    }
+  }
+</style>
+<div class="row">
+  <div class="column side"></div>
+  <center>
+    <div class="column middle">
+      <h1 style="margin-top: 50px;">Edit your account</h1>
+      <p style="font-size:20px;">You can edit your account using the following form:</p>
+      <div>
+        <form class="myForm form-signin" style="max-width: 75%;" method="post">
           {% csrf_token %}
-          <h2>Email</h2>
+          <h3>Email</h3>
           <input type="email" name="email" placeholder="Email address" required autofocus value={{form.initial.email}}>
           <h3>Username</h3>
-          <input type="text" name="username" placeholder="Username" required value="{{form.initial.username}}">
+          <input style="font: 1.2em 'Taviraj';" type="text" name="username" placeholder="Username" required
+            value="{{form.initial.username}}">
           {% for field in form %}
-					<p>{% for error in field.errors %}
-					<p style="color: red; text-shadow: 2px 2px 5px grey;">{{ error }}</p>
-					{% endfor %}
-					</p>
-					{% endfor %}
-					{% if form.non_field_errors %}
+          <p>{% for error in field.errors %}
+          <p style="color: red; text-shadow: 2px 2px 5px grey;">{{ error }}</p>
+          {% endfor %}
+          </p>
+          {% endfor %}
+          {% if form.non_field_errors %}
           <div style="color: red; text-shadow: 2px 2px 5px grey;">
             <p>{{form.non_field_errors}}</p>
           </div>
           {% endif %}
           <div>
-						<button type="submit">Update</button>
-					</div>
-          </form>
-        </div>
-    </center>
-</body>
+            <button class="button button2" type="submit">Update</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </center>
+  <div class="column side"></div>
+</div>
 
 
 

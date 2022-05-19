@@ -1,39 +1,43 @@
-{% extends "base.html" %}
-{% load static %} 
-{% block content %} 
-<!DOCTYPE html>
-<html lang="en-us">
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+<style>
+  html {
+    background: rgb(127, 94, 157);
+    background: linear-gradient(329deg, rgba(127, 94, 157, 0.8323704481792717) 0%, rgba(109, 122, 170, 0.8239670868347339) 28%, rgba(198, 59, 66, 0.8379726890756303) 100%);
+  }
+</style>
 
-  <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
-    <style>
-        body {
-            font-family: 'Taviraj';
-            font-size: 22px;
-        }
-    </style>
-  </head>
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+<h1 style="text-align:center; border:2px solid #800000; margin-top:100px;"><strong> <span
+      style="color:#800000">PlattsMeet</span> Club Hub</strong></h1>
+<p style="text-align:center; font-family:Taviraj; font-size: 30px;"><b>Do you want to get involved?</b></p>
+<p style="text-align:center; font-family:Taviraj; font-size: 22px;"><b>Here are some of the types of clubs SUNY
+    Plattsburgh
+    has to offer:</b></p>
 
-  <body>
-    <font size="5"><a href="{% url 'portalpage' %}">Back to Portal Page</a></font> 
-    <h1 style="text-align:center; border:2px solid Tomato;"><strong> <span style="color:tomato">PlattsMeet</span> Club Hub</strong></h1>
-      <p style="text-align:center;"><b>Do you want to get involved?</b></p>
-      <p style="text-align:center;">Here are some of the types of clubs SUNY Plattsburgh has to offer:</p>
-        <ul style="list-style-type:disc;">
-          <li>Academic Honor Societies (Fraternity/Sorority Life)</li>
-          <li>Sports Clubs</li>
-          <li>Student Association Clubs</li>
-            <dd> <li><small>Academic Clubs</small></li>
-            <li><small>Cultural Clubs</small></li>
-            <li><small>Recreational Clubs</small></li>
-            </dd>
-        </ul>
-    <hr>
-    <h2 style="text-align:center;border:2px solid Tomato;"><strong>And More!</strong></h2>
-      <p style="text-align:center;"> <a href="https://www.plattsburgh.edu/plattslife/get-involved/clubs-organizations/index.html">Click here</a> to browse clubs on the SUNY Plattsburgh website! </p>
+<div style="font-weight:bold;">
+  <dl style="text-align:left; margin:auto; max-width:600px; font-family:Taviraj; font-size: 22px;">
+    <dt>- Academic Honor Societies (Fraternity/Sorority Life)</dt>
+    <dt>- Sports Clubs</dt>
+    <dt>- Student Association Clubs</dt>
+    <dd>
+      <li style="background:none;" class="clubs"><small>Academic Clubs</small></li>
+      <li style="background:none;" class="clubs"><small>Cultural Clubs</small></li>
+      <li style="background:none;" class="clubs"><small>Recreational Clubs</small></li>
+    </dd>
+  </dl>
+</div>
 
-  </body>
-</html>
+<div>
+  <h3 style="text-align:center;border:2px solid Tomato; font-family:Taviraj; font-size: 22px;"><strong>And
+      More!</strong></h3>
+  <p style="text-align:center; font-family:Taviraj; font-size: 22px;"> <a
+      href="https://www.plattsburgh.edu/plattslife/get-involved/clubs-organizations/index.html">Click here</a> to
+    browse
+    clubs on the SUNY Plattsburgh website! </p>
+</div>
+
+
+
 {% endblock content %}

@@ -8,7 +8,7 @@ from accounts.models import Account
 
 #register user
 class RegistrationForm(UserCreationForm):
-	email = forms.EmailField(max_length=50, help_text='Required. Add a valid email address.')
+	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'myInputClass'}), max_length=50, help_text='Required. Add a valid email address.')
 
 	class Meta:
 		model = Account
@@ -47,7 +47,7 @@ class UserLoginForm(forms.ModelForm):
 
 #Update User Account information
 class UserUpdateForm(forms.ModelForm):
-    email = forms.EmailField()
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'myInputClass'}))
 
     class Meta:
         model = Account

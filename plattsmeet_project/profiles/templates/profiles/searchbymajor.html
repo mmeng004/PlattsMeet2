@@ -1,45 +1,107 @@
-{% extends "base.html" %}
-{% load static %} 
-{% block content %} 
-  {% if query %}
-    <h1>Students majoring in "{{ query }}"</h1>
-    <h3>
-      {% with results.count as total_results %}
-        Found {{ total_results }} user{{ total_results|pluralize }}
-      {% endwith %}
-    </h3>
-    {% for profiles in results %}
+{% extends "base2.html" %}
+{% load static %}
+{% block content %}
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+<style>
+  * {
+
+    box-sizing: border-box;
+
+  }
+
+  h1 {
+    color: white;
+    font-family: 'Taviraj';
+    font-size: 40px;
+  }
+
+  .column {
+    float: left;
+    padding: 10px;
+    height: 1000px;
+  }
+
+  /* Left and right column */
+  .column.side {
+    background: url("{% static 'schoolicons.jpg' %}") repeat center;
+    background-size: 550px;
+    width: 25%;
+  }
+
+  /* Middle column */
+  .column.middle {
+    width: 50%;
+    font-family: 'Taviraj';
+    background: rgb(80, 70, 70);
+    background: linear-gradient(325deg, rgba(80, 70, 70, 0.9500175070028011) 0%, rgba(186, 165, 165, 0.938813025210084) 57%, rgba(199, 59, 66, 0.9360119047619048) 100%);
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  @media (max-width: 600px) {
+
+    .column.side,
+    .column.middle {
+      width: 100%;
+    }
+  }
+</style>
+<div class="row">
+  <div class="column side"></div>
+  <center>
+    <div class="column middle">
+      {% if query %}
+      <h1>Students majoring in "{{ query }}"</h1>
+      <h3>
+        {% with results.count as total_results %}
+        - Found {{ total_results }} user{{ total_results|pluralize }} -
+        {% endwith %}
+      </h3>
+      {% for profiles in results %}
       <h4>
         <a>
-          Username:{{ profiles.user }}
+          Username: {{ profiles.user }}
         </a>
       </h4>
-    {% empty %}
+      {% empty %}
       <p>There are no results for your query.</p>
-    {% endfor %}
-    <div>
-      <form onsubmit="return executeQuery();">
-          <input type="text" name="q" id="id_q_large" placeholder="Type in username">
-      </form>
-    </div>
-  
-    <p><a href="{% url "profile:searchbymajor" %}">Search again</a></p>
-  {% else %}
-    <h1>Search by Major</h1>
-    <form method="get">
-      {{ form.as_p }}
-      <input type="submit" value="Search">
-    </form>
-  {% endif %}
+      {% endfor %}
+      <div>
+        <a href="{% url 'profile:searchbymajor' %}"><button class="button button2">Search again</button></a>
+      </div>
+      <div>
+        <p>If anyone interests you from the list above, type their username here to check out their profile!</p>
+        <form class="myForm" onsubmit="return executeQuery();">
+          <input type="text" name="q" id="id_q_large" placeholder="Username">
+        </form>
+      </div>
 
-  <script type="text/javascript">
-    function executeQuery() {
-        var query = ""
-        if (query == ""){
-            query = document.getElementById('id_q_large').value;
-        }
-        window.location.replace("{% url 'search' %}?q=" + query)
-        return false
+      {% else %}
+      <h1 style="margin-top:50px;">Search by Major</h1>
+      <form method="get">
+        {{ form.as_p }}
+        <button class="button button2" type="submit">Search</button>
+      </form>
+      {% endif %}
+    </div>
+  </center>
+  <div class="column side"></div>
+</div>
+
+
+<script type="text/javascript">
+  function executeQuery() {
+    var query = ""
+    if (query == "") {
+      query = document.getElementById('id_q_large').value;
     }
-  </script>
+    window.location.replace("{% url 'search' %}?q=" + query)
+    return false
+  }
+</script>
 {% endblock content %}

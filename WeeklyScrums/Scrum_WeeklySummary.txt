@@ -1,0 +1,138 @@
+Scrum Summary
+
+Tuesday, March 1, 2022
+4:27 PM
+
+Week 2 - 3/1
+Becky: got django working, looking into angular, researching on javascript
+Next week: documentation/project management, help/about page
+
+Meron: get acquantied with tech, installed django framework, watched tutorials, got reference sites for sprint implementation
+Next week: begin working on login/logout assigned +documentation/project management/jira
+
+Xuanting: learn to use django
+Next week: user management, get onto github
+
+Matthew: django downloaded and working, looked into articles of running django with front end frameworks/database
+Next week: registration page
+
+Week 3 - 3/8
+Becky: followed django tutorial for building website, wrote the about us page in html, worked on architecture and design presentation (user stories, architecture views)
+Next Week: software engineering practices documentation, code review, help page, software and design principles, demo ready, after demo look at what we can start for sprint 2
+
+Meron: django and react demo, login/logout, documentation (class diagram)
+Next week: refining work from last week, work on sprint 2 after demo
+
+Xuanting: user management in django, did personas, state diagram, and sequence diagram
+Next week: sprint 2, finalizing work for demo
+
+Matthew: architecture and design (personas, user stories, conceptual view diagram), registration page
+Next week: finish registration page for demo, and account deletion page, tasks for sprint 2
+
+Week 4 - 3/22 (after spring break)
+Becky: software engineering practices documentation, help page completed, software and design principles completed, did demo
+Next week: code review, planning for full implementation with django and search functionality
+
+Meron: worked on integrating django/react, worked on beautifying site
+Next week: code review, search history, friend request
+
+Xuanting: reset password, design principles, help page
+Next week: user settings, search functionality
+
+Matt: software design principles, account creation/deletion, tried to implement django api for authentication
+Next week: finish implementing user authentication and sprint 2 tasks
+
+Week 5 - 3/29
+Becky: got a bit behind, jira task for the week setup and wrote accomplishments from sprint 1
+Next week: catch up on making jira tasks, get project functioning remotely, finish code review task
+
+Meron: work on sprint for friend requests building portfolios
+Next week: continuing research on friend requests 
+
+Xuanting: resetting password, almost finished, uploaded to github
+Next week: code review finished and user settings page
+
+Matt: working with applications running on local server, started code review
+Next week: creating and deleting accounts catch up, sprint 2 tasks, finish code review
+
+Week 6 - 4/5
+Becky: jira tasks for the rest of the projects for myself setup, finished code review
+Next week: finalize preparations for demo, update necessary documents
+
+Meron: functionality for send friend request and trying to figure out merge for everyone to work on project
+Next week: finish code review for sep document and get ready for demo 2
+
+Xuanting: started friend search implementation
+Next week: finish implementation and settings page
+
+Matt: completed code review for Meron sprint 1, worked on integration of pieces for sprint 1, began working on pieces for sprint 2
+Next week: complete sprint 2 and finalize documentation
+
+Week 7 - 4/12
+Becky: finished document updates for demo, worked with meron to try to fix docker/github issues 
+Next week: work on notifications/filtering if we get friends list running, get together with everyone in person
+
+Meron: resolve blocker with virtual env and git, tried out docker, working 
+Next week: get profile part done then proceed with sprint 3
+
+Xuanting: architecture and design, search
+Next week: finish search history, settings
+
+Matt: completed integration of account creation, demo presentation
+Next week: profile, friend's list, code review sprint 2
+
+Week 8 - 4/19
+Becky: got postreSQL working for everyone - blocker
+Next week: get ready for demo, make video for sprint 3, code review sprint 2
+
+Meron: made new repository, got postreSQL working for everyone
+Next week: profile/friends list and demo
+
+Xuanting: made sure everyone can run project
+Next week: finish code review, css design
+
+Matt: code review sprint 2, working on profile page app 
+Next week: finishing documentation and demo for sprint 3
+
+Week 9 - 4/26
+Becky: made demo, started CSS for home page
+Next week: finish css for landing page, start css for profile pages
+
+Meron: fixed profile implementation, friend requests started
+Next week: search functionality, notifications, and chat
+
+Xuanting: fixed password send, did demo 3
+Next week: search functionality, css work with becky
+
+Matt: profile editing, prepare for demo 3/video
+Next week: code review sprint 3, friend's  list help, tasks for sprint 4
+
+
+Week 10 - 5/3
+Becky: started css for profile pages and adding classes to help ensure the layout is how we want it per section and not sitewide
+Next week: finish all CSS for website to make sure what we have is all pretty for the demo
+
+Meron: search functionality, notifications but needs modification
+Next week: finish search functionality and notifications
+
+Xuanting: start on accepting/decline friend request
+Next week: finish demo 4 and code review from sprint 3
+
+Matt:  Completed the code reviews for sprint 3, began working on account deletion functionality
+Next week: Prepare documentation and presentation for sprint 4, complete sprint 4 tasks (account deletion)
+
+
+Week 11 - 5/10
+Becky: finished about half css for the site for demo
+Next week: finish up documentation, finish css for final presentation
+
+Meron:  Completed Messaging Functionality
+Next week: Working on a notification system
+
+Xuanting: Worked on the front end CSS, worked on Demo 4 assignments
+Next week:  Plans on working on the final powerpoint presentation
+
+Matt: Worked on integration of account deletion
+Next Week: Complete account deletion, work on final power point
+
+

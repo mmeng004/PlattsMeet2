@@ -48,7 +48,11 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'friend.apps.FriendConfig',
     'message.apps.MessageConfig',
+    'active_link',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
     
 #AUTH_USER_MODEL = 'accounts.CustomUser'
 MIDDLEWARE = [

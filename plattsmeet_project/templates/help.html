@@ -1,53 +1,58 @@
 {% extends "base.html" %}
-{% load static %} 
-{% block content %} 
-  <head>
-	<meta  charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My test page</title>
-	<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
-	<style>
-        body {
-          font-family: 'Taviraj';font-size: 22px;
-          }
-		a:link {text-decoration:none;}
-        a:visited {text-decoration:none;}
-        a:hover {text-decoration:underline;}
-        a:active {text-decoration:underline;}
-    </style>
-  </head>
-  <ul>
+{% load static %}
+{% block content %}
+<ul>
 	<li><a href="{% url 'login' %}">Log in</a></li>
 	<li><a href="{% url 'register' %}">Register</a></li>
 	<li><a href="{% url 'about' %}">About Us</a></li>
 	<li class="dropdown">
 		<a class="active" href="javascript:void(0)" class="dropbtn">Help</a>
-		<div class="dropdown-content">    
+		<div class="dropdown-content">
 			<a class="active" href="{% url 'help' %}">FAQ/Contact Us</a>
-			<a href="{% url 'password_reset' %}">Forgot password?</a></li>
-		</div>
-  </ul>
-  <div style="margin-left:208px">
-        
-        <h1 style="text-align:center; border:2px solid Tomato;"> </h1>
-        <body style="background-color:white;">
-        <font size="16">
-        <p><img src="https://i.ibb.co/wW82yP5/PM.png" height="150" width="150" alt="Logo" /><b>PlattsMeet Help Center</b></p>
-		</font> 
-		<font size="5">
-		<dl>
-		    <p><dt>Q1:Do I need to pay for PlattsMeet?</dt>
-			<dd>A: No! PlattsMeet is <b>FREE</b> for all SUNY Plattsburgh students!</dd></p>
-			<p><dt>Q2:Can I use other email accounts to register?</dt>
-			<dd>A:PlattsMeet is made for Plattsburgh students. So you will need to register with your plattsburgh.edu email.</dd></p>
-			<p><dt>Q3:What will happen when I graduate?</dt>
-			<dd>A:  Don't worry! You can delete your account anytime.</dd></p>
-			<p><dt>Q4:Can I change my password or username?</dt>
-			<dd>A: Of course! You can change your password/username anytime.</dd></p>
-		</dl>
-		<h4>If you have other questions, please contact us by email! </h4>
-		<h4>Email: XXXX@plattsburgh.edu </h4>
-		</font> 
-		 <h2 style="text-align:center;border:2px solid Tomato;"><strong> </strong></h2>
+			<a style="color:white;" href="{% url 'password_reset' %}">Forgot password?</a>
+	</li>
 	</div>
-{% endblock content %}
+</ul>
 
+<head>
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FAQ</title>
+	<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+
+</head>
+
+<div style="margin-left:208px; font-family: 'Taviraj'; font-size: 22px;">
+
+	<h1 style="text-align:center; border:2px solid Tomato;"> </h1>
+
+	<body style="background-color:white;">
+		<font size="16">
+			<p><img src="https://i.ibb.co/wW82yP5/PM.png" height="150" width="150" alt="Logo" /><b>PlattsMeet Help
+					Center</b></p>
+		</font>
+		<font size="5">
+			<dl>
+				<p>
+					<dt>Q1:Do I need to pay for PlattsMeet?</dt>
+					<dd>A: No! PlattsMeet is <b>FREE</b> for all SUNY Plattsburgh students!</dd>
+				</p>
+				<p>
+					<dt>Q2:Can I use other email accounts to register?</dt>
+					<dd>A:PlattsMeet is made for Plattsburgh students. So you will need to register with your
+						plattsburgh.edu email.</dd>
+				</p>
+				<p>
+					<dt>Q3:What will happen when I graduate?</dt>
+					<dd>A: Don't worry! You can delete your account anytime.</dd>
+				</p>
+				<p>
+					<dt>Q4:Can I change my password or username?</dt>
+					<dd>A: Of course! You can change your password/username anytime.</dd>
+				</p>
+			</dl>
+			<h4>If you have other questions, please contact us by email! </h4>
+			<h4>Email: XXXX@plattsburgh.edu </h4>
+		</font>
+		<h2 style="text-align:center;border:2px solid Tomato;"><strong> </strong></h2>
+</div>
+{% endblock content %}

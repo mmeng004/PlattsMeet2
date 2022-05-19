@@ -1,0 +1,83 @@
+<!---base html for site after login-->
+{% load static %}
+{% load active_link_tags %}
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+</head>
+<header>
+    <div class="boxheader"><img class="logo" src="{% static 'logo.svg' %}" alt="/">
+        <h2>PlattsMeet</h2>
+    </div>
+</header>
+<div>
+    {% if messages %}
+    <ul style="margin-top:55px; padding:8px; font-size: 20px; color: white;font-family: 'Taviraj';">
+        {% for message in messages %}
+        <li> {{ message.tags }}!
+            {{ message|safe }}
+            <a href="" class="close">x</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+<nav>
+    {% if request.user.is_authenticated %}
+    <ul class="ul2">
+        <li class="li2">
+            <a class="{% active_link 'portalpage' 'active2' %}" href="{% url 'portalpage' %}">Portal Page</a>
+        </li>
+        <li class="dropdown2">
+            <a href="javascript:void(0)" class="dropbtn2">Account Management</a>
+            <div class="dropdown-content2" style="min-width:253px;">
+                <a class="{% active_link 'account:view' 'active2' %}"
+                    href="{% url 'account:view' user_id=request.user.id %}">View Account</a>
+                <a class="{% active_link 'profile:createprofile' 'active2' %}"
+                    href="{% url 'profile:createprofile' %}">Create/Update Profile</a>
+                <a class="{% active_link 'profile:viewprofile' 'active2' %}" href="{% url 'profile:viewprofile' %}">View
+                    Profile</a>
+            </div>
+        </li>
+        <li class="dropdown2">
+            <a href="javascript:void(0)" class="dropbtn2">Find Friends</a>
+            <div class="dropdown-content2">
+                <a class="{% active_link 'profile:searchbymajor' 'active2' %}"
+                    href="{% url 'profile:searchbymajor' %}">Search by Major</a>
+                <a class="{% active_link 'profile:searchbyhobbies' 'active2' %}"
+                    href="{% url 'profile:searchbyhobbies' %}">Search by Hobbies</a>
+                <a class="{% active_link 'profile:searchbyhometown' 'active2' %}"
+                    href="{% url 'profile:searchbyhometown' %}">Search by Country</a>
+            </div>
+        </li>
+        <li class="li2">
+            <a class="{% active_link 'message:inbox' 'active2' %}" href="{% url 'message:inbox' %}">Messages</a>
+        </li>
+        <li class="li2">
+            <a class="{% active_link 'clubs' 'active2' %}" href="{% url 'clubs' %}">Club Hub</a>
+        </li>
+        <li class="li2" style="float:right;">
+            <a class="{% active_link 'logout' 'active2' %}" href="{% url 'logout' %}">Logout</a>
+        </li>
+
+    </ul>
+    {% endif %}
+</nav>
+
+{% block content %}
+
+<body>
+</body>
+{% endblock content %}
+
+<div class="wrapper">
+    <footer class="footer"></footer>
+</div>
+
+</html>

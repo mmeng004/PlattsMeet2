@@ -1,32 +1,29 @@
 {% extends "base.html" %}
-{% load static %} 
+{% load static %}
 {% block content %}
 <style>
-	html {
-		background: url("{% static '2019moments.png' %}") repeat center fixed;
-		overflow: auto;
+    html {
+        background: url("{% static '2019moments.png' %}") repeat center fixed;
+        overflow: auto;
         background-position: 208px 208px;
 
-	}
+    }
 </style>
-    <ul>
-        <li><a href="{% url 'login' %}">Log in</a></li>
-        <li><a href="{% url 'register' %}">Register</a></li>
-        <li><a href="{% url 'about' %}">About Us</a></li>
-        <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">Help</a>
-            <div class="dropdown-content">    
-                <a href="{% url 'help' %}">FAQ/Contact Us</a>
-                <a href="{% url 'password_reset' %}">Forgot password?</a>
-            </div>
-        </li>
-    </ul>
+<ul>
+    <li><a href="{% url 'login' %}">Log in</a></li>
+    <li><a href="{% url 'register' %}">Register</a></li>
+    <li><a href="{% url 'about' %}">About Us</a></li>
+    <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">Help</a>
+        <div class="dropdown-content">
+            <a style="color:white;" href="{% url 'help' %}">FAQ/Contact Us</a>
+            <a style="color:white;" href="{% url 'password_reset' %}">Forgot password?</a>
+        </div>
+    </li>
+</ul>
 <!-- 
     <div>
         <img class = "logo" src = "{% static 'logo.svg' %}" alt="/"> 
     </div>
    -->
 {% endblock content %}
-
-
-

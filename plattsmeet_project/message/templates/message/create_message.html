@@ -1,33 +1,75 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
+{% load static %}
 {% block content %}
+<style>
+	* {
+
+		box-sizing: border-box;
 
 
-<div>
-	<div>
-		<div >
-			<a href="{% url 'message:inbox' %}" >Back to Your Inbox</a>
-		</div>
-	</div>
+	}
 
-	<div >
-		<div>
-			<h3>Start a Conversation!</h3>
-		</div>
-	</div>
+	.column {
+		float: left;
+		padding: 10px;
+		height: 1000px;
+		font-family: 'Taviraj';
+	}
 
-	<div>
-		<div>
-			<form method="POST">
-				{% csrf_token %}
-				<p>Enter the username for the person you would like to talk to.</p>
-				{{ form }}
-				<div >
-					<button type="submit">Message</button>
+	/* Left and right column */
+	.column.side {
+		background: url("{% static 'redchatbg.jpg' %}");
+		width: 25%;
+	}
+
+	/* Middle column */
+	.column.middle {
+		width: 50%;
+		background: rgb(21, 37, 63);
+		background: linear-gradient(180deg, rgba(21, 37, 63, 0.7959558823529411) 0%, rgba(157, 158, 162, 0.8687850140056023) 29%, rgba(198, 59, 66, 0.8379726890756303) 100%);
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	@media (max-width: 600px) {
+
+		.column.side,
+		.column.middle {
+			width: 100%;
+		}
+	}
+</style>
+<link href='https://fonts.googleapis.com/css?family=Taviraj' rel='stylesheet'>
+<div class="row">
+	<div class="column side"></div>
+	<center>
+		<div class="column middle">
+			<div>
+				<h3 style="font-size:30px;">Let's get talking!</h3>
+			</div>
+
+
+			<div>
+				<div>
+					<form method="POST">
+						{% csrf_token %}
+						<p style="font-size:20px;">Friend's Username:</p>
+						{{ form }}
+						<div>
+							<button class="button button2" type="submit">Start Conversation</button>
+						</div>
+
+					</form>
 				</div>
-			
-			</form>
+			</div>
 		</div>
-	</div>
+	</center>
+	<div class="column side"></div>
 </div>
 
 {% endblock %}

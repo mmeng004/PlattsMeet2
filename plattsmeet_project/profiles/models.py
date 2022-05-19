@@ -85,7 +85,7 @@ class Profile(models.Model):
     )
     LEVEL = (
         ('Freshman','Freshman'),
-        ('Sophmore','Sophmore'),
+        ('Sophomore','Sophomore'),
         ('Junior','Junior'),
         ('Senior','Senior'),
         ('Graduate','Graduate'),

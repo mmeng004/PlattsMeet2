@@ -1,10 +1,19 @@
 {% extends "base.html" %}
-{% load static %} 
-{% block content %} 
+{% load static %}
+{% block content %}
 <style>
 	html {
 		background: url("{% static 'sunyplattsburgh.png' %}") no-repeat center fixed;
 		background-size: cover;
+	}
+
+	.myForm>input[type=text] {
+		border: 2px solid red;
+		background-color: white;
+		font: 1em 'Taviraj';
+		grid-column: span 1;
+		padding: .3em;
+		color: black;
 	}
 </style>
 <ul>
@@ -13,46 +22,53 @@
 	<li><a href="{% url 'about' %}">About Us</a></li>
 	<li class="dropdown">
 		<a href="javascript:void(0)" class="dropbtn">Help</a>
-		<div class="dropdown-content">    
+		<div class="dropdown-content">
 			<a href="{% url 'help' %}">FAQ/Contact Us</a>
-			<a href="{% url 'password_reset' %}">Forgot password?</a></li>
-		</div>
-  </ul>
+			<a href="{% url 'password_reset' %}">Forgot password?</a>
+	</li>
+	</div>
+</ul>
+
 <body>
 	<center>
-           <p>Registration Form<p>
-		    <form method="post">
-				{% csrf_token %}
-				<br>
-				<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-				<br>
+		<p style="font: 2em 'Taviraj';">Registration Form
+		<p>
+		<form class="myForm" style="margin-left:200px;" method="post">
+			{% csrf_token %}
 
-				<input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required>
-				<br>
+			<br>
+			<input type="email" name="email" id="inputEmail" class="form-control"
+				placeholder="Email address @plattsburgh.edu" required autofocus>
+			<br>
 
-				<input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
-				<br>
-				<input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm password" required>
-				<br>
-				{% for field in registration_form %}
-				<p>
+			<input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required>
+			<br>
+
+			<input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password"
+				required>
+			<br>
+			<input type="password" name="password2" id="inputPassword2" class="form-control"
+				placeholder="Confirm password" required>
+			<br>
+			{% for field in registration_form %}
+			<p>
 				{% for error in field.errors %}
-				<p style="color: red">{{ error }}</p>
-				{% endfor %}
-				</p>
-				{% endfor %}
-				{% if registration_form.non_field_errors %}
-				<div style="color: red">
-					<p>{{registrationform.non_field_errors}}</p>
-				</div>
+			<p style="color: red">{{ error }}</p>
+			{% endfor %}
+			</p>
+			{% endfor %}
+			{% if registration_form.non_field_errors %}
+			<div style="color: red">
+				<p>{{registrationform.non_field_errors}}</p>
+			</div>
 
-				{% endif %}
+			{% endif %}
 
-				<button type="submit" >Register</button>
+			<button type="submit">Register</button>
 
-			</form>
+		</form>
 	</center>
 </body>
 
-     
+
 {% endblock content %}
